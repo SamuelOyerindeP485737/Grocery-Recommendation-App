@@ -1,6 +1,6 @@
 # Grocery recommendation app
 
-*Currently in development*
+*Summer project (Currently in development)*
 
 ### Technologies used:
 - JavaScript (Typescript with react)
