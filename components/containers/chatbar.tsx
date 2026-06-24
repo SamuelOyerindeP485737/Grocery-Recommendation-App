@@ -51,7 +51,7 @@ export function MyChatbar({sidebarState, chatbarState, ChangedSidebarState, Chan
         <div className={SidebarClasslist}>
             <div className=" flex">
                 
-                <button onClick={toggleChatbarState} className="bg-[var(--button-inactive-bg)] p-1.5 border-1 border-[var(--border-color)] aspect-square rounded-full hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]">
+                <button onClick={toggleChatbarState} className="bg-[var(--button-inactive-bg)] p-2 border-1 border-[var(--border-color)] aspect-square rounded-full hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]">
                     <img alt="chatToggle" src="/message.svg" width="22" height="18"/>
                 </button>
                 
