@@ -3,24 +3,13 @@ import MyGanttChart, {GanttChart} from "@/components/widgets/ganttChart";
 import BasicTable, {table} from "@/components/widgets/table";
 import {useState} from "react";
 import classNames from "classnames";
+import {sidebarStateType} from "@/components/containers/sidebar";
+import {changeSidebarStateType} from "@/components/containers/sidebar";
+import {chatbarStateType} from "@/components/containers/Dashboard/chatbar";
+import {changeChatbarStateType} from "@/components/containers/Dashboard/chatbar";
 import {DragSizing} from 'react-drag-sizing'
 import {page} from "@/app/page";
 
-type ChatbarStateType = {
-    chatbarState: boolean;
-}
-
-type SidebarStateType = {
-    sidebarState: boolean;
-}
-
-type ChangedChatbarStateType = {
-    ChangedChatbarState: (ChatbarState: boolean) => void;
-}
-
-type ChangedSidebarStateType = {
-    ChangedSidebarState: (SidebarState: boolean) => void;
-}
 
 export type Content = {
     BarChart: barChart[],
@@ -36,20 +25,20 @@ type PageNumberType = {
     PageNumber: number;
 }
 
-type MyContentProps = ChatbarStateType & SidebarStateType & ChangedSidebarStateType & ChangedChatbarStateType & ContentData & PageNumberType;
+type MyContentProps = chatbarStateType & sidebarStateType & changeSidebarStateType & changeChatbarStateType & ContentData & PageNumberType;
 
 
-export function MyContent({chatbarState, sidebarState, ChangedSidebarState, ChangedChatbarState, contentData, PageNumber} : MyContentProps) {
+export function MyContent({chatbarState, sidebarState, changeSidebarState, changeChatbarState, contentData, PageNumber} : MyContentProps) {
     
     
 
     const [currentPage, setCurrentPage] = useState<string>("Expiry dates");
     function toggleSidebarState() {
-        ChangedSidebarState(!sidebarState);
+        changeSidebarState(!sidebarState);
     }
     
     function toggleChatbarState() {
-        ChangedChatbarState(!chatbarState);
+        changeChatbarState(!chatbarState);
     }
     
     const costBtnClassList = classNames({"bg-[var(--inverted-active-bg)] text-white":currentPage == "Cost","hover:bg-[var(--button-hover)] bg-[var(--button-inactive-bg)]":currentPage !== "Cost"},"px-4","py-2.5","rounded-[1.125rem]")
@@ -58,8 +47,8 @@ export function MyContent({chatbarState, sidebarState, ChangedSidebarState, Chan
         <div className="h-screen flex-1 bg-[var(--background)]">
             <div className="h-[50%]">
                 
-                <div className="p-3 h-fit flex gap-auto justify-between">
-                    <div className="flex flex-row gap-3 items-center">
+                <div className="p-3 h-16 flex gap-auto justify-between">
+                    <div className="flex gap-3 items-center">
                         <button onClick={toggleSidebarState} className={sidebarState ? "hidden" : " border-1 border-[var(--border-color)] bg-[var(--button-inactive-bg)] rounded-full p-2.5 aspect-square hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]"}>
                             <img alt="sidebarToggle" src="/sidebar.left.svg" width="18" height="18"></img>
                         </button>

@@ -1,16 +1,21 @@
 import {page} from "@/app/page";
 import classNames from "classnames";
+import {ValidCategory} from "@/app/page";
 
 type MySidebarProps = {
   pageData: page[];
 }
 
-type sidebarStateType = {
+export type sidebarStateType = {
     sidebarState: boolean;
 }
 
-type changedSidebarStateType = {
-    changedSidebarState: (sidebarState: boolean) => void;
+export type changeSidebarStateType = {
+    changeSidebarState: (sidebarState: boolean) => void;
+}
+
+type changeCategoryType = {
+    changeCategory: (category: ValidCategory) => void;
 }
 
 type changedPageNumberType = {
@@ -25,16 +30,25 @@ type newPageType = {
     createNewPage: () => void;
 }
 
-type MySidebarParameters = MySidebarProps & sidebarStateType & changedSidebarStateType & changedPageNumberType & currentPageType & newPageType;
+type currentCategoryType = {
+    currentCategory: ValidCategory
+}
+
+type MySidebarParameters = MySidebarProps & sidebarStateType & changeCategoryType & changeSidebarStateType & changedPageNumberType & currentCategoryType & currentPageType & newPageType;
 
 
-export function MySidebar({pageData, sidebarState, changedSidebarState, changedPageNumber, currentPage, createNewPage}: MySidebarParameters) {
+export function MySidebar({pageData, sidebarState, changeCategory, changeSidebarState, changedPageNumber, currentCategory, currentPage, createNewPage}: MySidebarParameters) {
     
     function toggleSidebar() {
-        changedSidebarState(!sidebarState);
+        changeSidebarState(!sidebarState);
     }
     
-    //or u could make a classNames([]) function to toggle classes based on variables (multiple even)
+    function setPage(currentPage: number, category: ValidCategory) {
+        if (currentCategory !== "Dashboard") {
+            changeCategory(category);
+        } 
+        changedPageNumber(currentPage);
+    }
     
   return (
     <div className={sidebarState ? "transition-all duration-300 px-3 w-70 flex flex-col border-r-1 border-(--border-color) bg-[var(--sidebar-background)] h-screen" : "transition-all duration-300 h-screen w-0 overflow-hidden"}>
@@ -45,16 +59,16 @@ export function MySidebar({pageData, sidebarState, changedSidebarState, changedP
                <p className="font-semibold text-xl">GMS</p>
            </div>
             
-            <button onClick={toggleSidebar} className=" border-1 border-(--border-color) bg-white p-2 rounded-full justify-center align-center aspect-square flex hover:bg-gray-100 active:bg-[var(--sidebar-active)]">
+            <button onClick={toggleSidebar} className=" border-1 border-(--border-color) bg-white p-2.5 rounded-full justify-center align-center aspect-square flex hover:bg-gray-100 active:bg-[var(--sidebar-active)]">
                 <img alt="sidebarToggle" src="/sidebar.left.svg" width="18" height="18"></img>
             </button>
         </div>
         <div className="flex flex-col py-4">
             
-                <button className="text-sm font-semibold opacity-70 truncate flex gap-2 align-left items-center rounded-[1.125rem] pl-3 py-2.5 mb-1 active:bg-(--sidebar-active) active:border-1 active:border-(--sidebar-items-border) hover:bg-(--sidebar-hover)">
+                <button onClick={() => changeCategory("Community")} className={classNames({"border-1 border-(--sidebar-border-items) bg-(--sidebar-active)":currentCategory==="Community"},{"hover:bg-(--sidebar-hover)":currentCategory!=="Community"},"text-sm font-semibold opacity-70 truncate flex gap-2 align-left items-center rounded-[1.125rem] pl-3 py-2.5 mb-1")}>
                     <img alt="CommunityIcon" src="/person.2.fill.svg" width="22" height="22"></img><p>Community</p>
                 </button>
-                <button className="text-sm font-semibold opacity-70 truncate flex gap-2 align-left items-center rounded-[1.125rem] pl-3 py-2.5 mb-1 active:bg-(--sidebar-active) active:border-1 active:border-(--sidebar-items-border) hover:bg-(--sidebar-hover)">
+                <button onClick={() => changeCategory("Changelog")} className={classNames({"border-1 border-(--sidebar-border-items) bg-(--sidebar-active)":currentCategory==="Changelog"},{"hover:bg-(--sidebar-hover)":currentCategory!=="Changelog"},"text-sm font-semibold opacity-70 truncate flex gap-2 align-left items-center rounded-[1.125rem] pl-3 py-2.5 mb-1")}>
                     <img alt="changelogIcon" src="/document.badge.clock.svg" width="22" height="22"></img><p>Changelog</p>
                 </button>
             
@@ -70,7 +84,7 @@ export function MySidebar({pageData, sidebarState, changedSidebarState, changedP
             <div className="pt-3 flex flex-col">
                 {pageData.map(page => (
                         
-                        <button key={page.id} onClick={() => changedPageNumber(+page.id - 1)} className={classNames({"bg-(--sidebar-active) border-1 border-(--sidebar-items-border)": currentPage == +page.id - 1,"hover:bg-[var(--sidebar-hover)]":currentPage != +page.id - 1},"text-sm truncate flex align-left rounded-[1.125rem] pl-3 py-2.5 mb-1")}>
+                        <button key={page.id} onClick={() => setPage(+page.id - 1,"Dashboard")} className={classNames({"bg-(--sidebar-active) border-1 border-(--sidebar-border-items)": currentPage == +page.id - 1 && currentCategory === "Dashboard","hover:bg-[var(--sidebar-hover)]":currentPage != +page.id - 1},"text-sm truncate flex align-left rounded-[1.125rem] pl-3 py-2.5 mb-1")}>
                             {page.title}
                         </button>
                     

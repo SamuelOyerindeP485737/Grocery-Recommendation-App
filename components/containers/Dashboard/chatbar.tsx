@@ -1,20 +1,14 @@
 import classNames from "classnames";
+import {sidebarStateType} from "@/components/containers/sidebar";
+import {changeSidebarStateType} from "@/components/containers/sidebar";
 
 
-type sidebarStateType = {
-    sidebarState: boolean;
-}
-
-type chatbarStateType = {
+export type chatbarStateType = {
     chatbarState: boolean;
 }
 
-type changedChatbarStateType = {
-    ChangeChatbarState: (chatbarState: boolean) => void;
-}
-
-type changedSidebarStateType = {
-    ChangedSidebarState: (sidebarState: boolean) => void;
+export type changeChatbarStateType = {
+    changeChatbarState: (chatbarState: boolean) => void;
 }
 
 type PageNumberType = {
@@ -28,17 +22,17 @@ type ChatbarContentType = {
     SendPrompt: () => void;
 }
 
-type ChatbarProps = sidebarStateType & chatbarStateType & changedSidebarStateType & changedChatbarStateType & PageNumberType & ChatbarContentType ;
+type ChatbarProps = sidebarStateType & chatbarStateType & changeSidebarStateType & changeChatbarStateType & PageNumberType & ChatbarContentType ;
 
 
-export function MyChatbar({sidebarState, chatbarState, ChangedSidebarState, ChangeChatbarState, PageNumber, chatbarPrompt, chatbarResponse, setChatbarPrompt, SendPrompt} : ChatbarProps) {
+export function MyChatbar({sidebarState, chatbarState, changeSidebarState, changeChatbarState, PageNumber, chatbarPrompt, chatbarResponse, setChatbarPrompt, SendPrompt} : ChatbarProps) {
     
     function toggleChatbarState() {
-        ChangeChatbarState(!chatbarState);
+        changeChatbarState(!chatbarState);
     }
     
-    function toggleSidebarState() {
-        ChangedSidebarState(!sidebarState);
+    function toggleSidebarState() { //Present for potential layout changes
+        changeSidebarState(!sidebarState);
     }
     
     function sendPrompt() {

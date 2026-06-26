@@ -1,11 +1,15 @@
 "use client";
 import { MySidebar } from "@/components/containers/sidebar";
-import { MyChatbar } from "@/components/containers/chatbar";
-import {Content, MyContent} from "@/components/containers/content";
+import { MyChatbar } from "@/components/containers/Dashboard/chatbar";
+import {Content, MyContent} from "@/components/containers/Dashboard/content";
 import {useState} from "react";
 import DragSizing from 'react-drag-sizing'
 import {barChart} from "@/components/widgets/barChart";
 import {table} from "@/components/widgets/table";
+import CommunityPage from "@/components/containers/Community/community";
+import ChangelogPage from "@/components/containers/Changelog/changelog";
+
+
 
 const pagesData = [
     {
@@ -132,12 +136,29 @@ export type page = {
     Content: Content
 }
 
+export type ValidCategory = "Dashboard" | "Community" | "Changelog"
+
 export default function Home() {
     let [PagesData, setPagesData] = useState<typeof pagesData>(pagesData);
-    const [sidebarState, setState] = useState<boolean>(true);
+    const [sidebarState, setSideState] = useState<boolean>(true);
     const [chatbarState, setChatState] = useState<boolean>(true);
     const [pageNumber, setPageNumber] = useState<number>(0);
+    
+    const categoryData = {
+        Dashboard: (
+            <>
+                <MyContent contentData={PagesData[pageNumber].Content} chatbarState={chatbarState} sidebarState={sidebarState} changeSidebarState={(value) => setSideState(value)} changeChatbarState={(value) => setChatState(value)} PageNumber={pageNumber}/>
+                <MyChatbar sidebarState={sidebarState} chatbarState={chatbarState} changeSidebarState={(value) => setSideState(value)} changeChatbarState={(value) => setChatState(value)} PageNumber={pageNumber} chatbarPrompt={PagesData[pageNumber].prompt} chatbarResponse={PagesData[pageNumber].response} setChatbarPrompt={(prompt) => setPagesData((prev) => prev.map((page,index) => index === pageNumber ? {...page, prompt: prompt} : page))} SendPrompt={() => sendPromptJson()}/>
+            </>
+        ),
+        Community: (<CommunityPage sidebarState={sidebarState} changeSidebarState={(value) => setSideState(value)}/>),
+        Changelog: (<ChangelogPage sidebarState={sidebarState} changeSidebarState={(value) => setSideState(value)}/>)
 
+    }
+
+    type Category = typeof categoryData
+    const [currentCategory, setCurrentCategory] = useState<ValidCategory>("Dashboard")
+    
     function newPage() {
         let pageID = PagesData.length + 1
         const newPageData = {
@@ -197,9 +218,16 @@ export default function Home() {
   return (
     <div>
       <main className="flex p-0 w-screen">
-        <MySidebar pageData={PagesData} sidebarState={sidebarState} changedSidebarState={(value) => setState(value)} changedPageNumber={(value) => setPageNumber(value)} currentPage={pageNumber} createNewPage={() => newPage()}/>
-          <MyContent contentData={PagesData[pageNumber].Content} chatbarState={chatbarState} sidebarState={sidebarState} ChangedSidebarState={(value) => setState(value)} ChangedChatbarState={(value) => setChatState(value)} PageNumber={pageNumber}/>
-        <MyChatbar sidebarState={sidebarState} chatbarState={chatbarState} ChangedSidebarState={(value) => setState(value)} ChangeChatbarState={(value) => setChatState(value)} PageNumber={pageNumber} chatbarPrompt={PagesData[pageNumber].prompt} chatbarResponse={PagesData[pageNumber].response} setChatbarPrompt={(prompt) => setPagesData((prev) => prev.map((page,index) => index === pageNumber ? {...page, prompt: prompt} : page))} SendPrompt={() => sendPromptJson()}/>
+        <MySidebar pageData={PagesData} 
+                   sidebarState={sidebarState} 
+                   changeCategory={(value) => setCurrentCategory(value)}
+                   changeSidebarState={(value) => setSideState(value)} 
+                   changedPageNumber={(value) => setPageNumber(value)}
+                   currentCategory={currentCategory}
+                   currentPage={pageNumber} 
+                   createNewPage={() => newPage()}
+        />
+          {categoryData[currentCategory]}
       </main>
     </div>
   );
