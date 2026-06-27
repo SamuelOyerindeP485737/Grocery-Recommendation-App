@@ -10,7 +10,7 @@ export default function ChangelogPage({sidebarState, changeSidebarState} : Chang
     }
     
     return (
-        <div className="flex-1 h-full">
+        <div className="flex-col flex-1 h-screen bg-(--background)">
             <div className="flex p-3 h-16 gap-3 items-center w-full">
                 <button onClick={toggleSidebarState} className={sidebarState ? "hidden" : " border-1 border-[var(--border-color)] bg-[var(--button-inactive-bg)] rounded-full p-2.5 aspect-square hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]"}>
                     <img alt="sidebarToggle" src="/sidebar.left.svg" width="18" height="18"></img>
@@ -19,7 +19,7 @@ export default function ChangelogPage({sidebarState, changeSidebarState} : Chang
                     Changelog
                 </h2>
             </div>
-            <div className="px-3 h-full w-full justify-center flex flex-col">
+            <div className="px-3 w-full justify-center flex flex-col">
                 <div className="flex flex-col items-center">
                     <div>
                         <h2 className="font-semibold text-3xl py-5">Welcome to Version 0.0.1 Beta!</h2>
