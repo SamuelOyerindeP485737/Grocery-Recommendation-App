@@ -147,16 +147,28 @@ export default function Home() {
     const categoryData = {
         Dashboard: (
             <>
-                <MyContent contentData={PagesData[pageNumber].Content} chatbarState={chatbarState} sidebarState={sidebarState} changeSidebarState={(value) => setSideState(value)} changeChatbarState={(value) => setChatState(value)} PageNumber={pageNumber}/>
-                <MyChatbar sidebarState={sidebarState} chatbarState={chatbarState} changeSidebarState={(value) => setSideState(value)} changeChatbarState={(value) => setChatState(value)} PageNumber={pageNumber} chatbarPrompt={PagesData[pageNumber].prompt} chatbarResponse={PagesData[pageNumber].response} setChatbarPrompt={(prompt) => setPagesData((prev) => prev.map((page,index) => index === pageNumber ? {...page, prompt: prompt} : page))} SendPrompt={() => sendPromptJson()}/>
+                <MyContent contentData={PagesData[pageNumber].Content} 
+                           chatbarState={chatbarState} 
+                           sidebarState={sidebarState} 
+                           changeSidebarState={(value) => setSideState(value)} 
+                           changeChatbarState={(value) => setChatState(value)} 
+                           PageNumber={pageNumber}/>
+                
+                <MyChatbar sidebarState={sidebarState} 
+                           chatbarState={chatbarState} 
+                           changeSidebarState={(value) => setSideState(value)} 
+                           changeChatbarState={(value) => setChatState(value)} 
+                           PageNumber={pageNumber} 
+                           chatbarPrompt={PagesData[pageNumber].prompt} 
+                           chatbarResponse={PagesData[pageNumber].response} 
+                           setChatbarPrompt={(prompt) => setPagesData((prev) => prev.map((page,index) => index === pageNumber ? {...page, prompt: prompt} : page))} SendPrompt={() => sendPromptJson()}/>
             </>
         ),
         Community: (<CommunityPage sidebarState={sidebarState} changeSidebarState={(value) => setSideState(value)}/>),
         Changelog: (<ChangelogPage sidebarState={sidebarState} changeSidebarState={(value) => setSideState(value)}/>)
 
     }
-
-    type Category = typeof categoryData
+    
     const [currentCategory, setCurrentCategory] = useState<ValidCategory>("Dashboard")
     
     function newPage() {
@@ -210,10 +222,6 @@ export default function Home() {
         }
         setPagesData(prev => prev.map((page,index) => index === pageNumber ? {...page,...responseJson} : page))
     }
-    console.count("MySidebar render")
-    console.count("MyContent render")
-    console.count("MyChatbar render")
-    
     
   return (
     <div>
