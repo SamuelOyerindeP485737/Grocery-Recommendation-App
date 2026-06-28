@@ -12,4 +12,4 @@
 - 30 day meal planning
 - Cost analysis
 - Expiry date tracking
-
+- Community meal plans (coming soon)
