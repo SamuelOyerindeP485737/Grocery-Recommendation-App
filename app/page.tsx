@@ -8,6 +8,7 @@ import {barChart} from "@/components/widgets/barChart";
 import {table} from "@/components/widgets/table";
 import CommunityPage from "@/components/containers/Community/community";
 import ChangelogPage from "@/components/containers/Changelog/changelog";
+import DashboardPlaceholder from "@/components/containers/Dashboard/placeholder";
 
 
 
@@ -147,21 +148,36 @@ export default function Home() {
     const categoryData = {
         Dashboard: (
             <>
-                <MyContent contentData={PagesData[pageNumber].Content} 
-                           chatbarState={chatbarState} 
-                           sidebarState={sidebarState} 
-                           changeSidebarState={(value) => setSideState(value)} 
-                           changeChatbarState={(value) => setChatState(value)} 
-                           PageNumber={pageNumber}/>
-                
-                <MyChatbar sidebarState={sidebarState} 
-                           chatbarState={chatbarState} 
-                           changeSidebarState={(value) => setSideState(value)} 
-                           changeChatbarState={(value) => setChatState(value)} 
-                           PageNumber={pageNumber} 
-                           chatbarPrompt={PagesData[pageNumber].prompt} 
-                           chatbarResponse={PagesData[pageNumber].response} 
+                {
+                    PagesData[pageNumber].response === "" ? (
+                        <>
+                            <DashboardPlaceholder sidebarState={sidebarState} 
+                                                  chatbarState={chatbarState} 
+                                                  changeSidebarState={(value) => setSideState(value)} 
+                                                  changeChatbarState={(value) => setChatState(value)}/>
+                        </>
+                    ) : (
+                        <>
+                            <MyContent contentData={PagesData[pageNumber].Content}
+                                       chatbarState={chatbarState}
+                                       sidebarState={sidebarState}
+                                       changeSidebarState={(value) => setSideState(value)}
+                                       changeChatbarState={(value) => setChatState(value)}
+                                       PageNumber={pageNumber}/>
+
+                            
+                        </>
+                    )
+                }
+                <MyChatbar sidebarState={sidebarState}
+                           chatbarState={chatbarState}
+                           changeSidebarState={(value) => setSideState(value)}
+                           changeChatbarState={(value) => setChatState(value)}
+                           PageNumber={pageNumber}
+                           chatbarPrompt={PagesData[pageNumber].prompt}
+                           chatbarResponse={PagesData[pageNumber].response}
                            setChatbarPrompt={(prompt) => setPagesData((prev) => prev.map((page,index) => index === pageNumber ? {...page, prompt: prompt} : page))} SendPrompt={() => sendPromptJson()}/>
+
             </>
         ),
         Community: (<CommunityPage sidebarState={sidebarState} changeSidebarState={(value) => setSideState(value)}/>),
@@ -225,7 +241,7 @@ export default function Home() {
     
   return (
     <div>
-      <main className="flex p-0 w-screen">
+      <main className="flex p-0 w-screen h-full">
         <MySidebar pageData={PagesData} 
                    sidebarState={sidebarState} 
                    changeCategory={(value) => setCurrentCategory(value)}

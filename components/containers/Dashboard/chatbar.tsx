@@ -40,7 +40,7 @@ export function MyChatbar({sidebarState, chatbarState, changeSidebarState, chang
     }
     
     const SidebarClasslist=classNames({"w-75":chatbarState,"p-3":chatbarState,"translate-x-full":!chatbarState,"w-0":!chatbarState},"flex","flex-col","justify-between","h-screen","border-l-1","border-[var(--border-color)]","transition-all","duration-300","overflow-hidden","bg-[var(--background)]");
-    
+    //Clear input value upon page change and send later
     return(
         <div className={SidebarClasslist}>
             <div className=" flex">

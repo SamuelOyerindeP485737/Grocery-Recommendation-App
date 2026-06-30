@@ -51,7 +51,7 @@ export function MySidebar({pageData, sidebarState, changeCategory, changeSidebar
     }
     
   return (
-    <div className={sidebarState ? "transition-all duration-300 w-70 border-r-1 border-(--border-color) bg-[var(--sidebar-background)] h-screen" : "transition-all duration-300 h-screen w-0 overflow-hidden"}>
+    <div className={sidebarState ? " transition-all duration-300 w-70 border-r-1 border-(--border-color) bg-[var(--sidebar-background)] h-screen" : "transition-all duration-300 h-screen w-0 overflow-hidden"}>
         <div className="grid h-screen grid-rows-[auto_auto_auto_1fr] min-h-0 w-full">
                 
             
