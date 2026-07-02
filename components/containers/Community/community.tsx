@@ -1,6 +1,7 @@
 import {sidebarStateType} from "@/components/containers/sidebar";
 import {changeSidebarStateType} from "@/components/containers/sidebar";
 import MyMealCard from "@/components/widgets/mealCard";
+import MyChallengeCard from "@/components/widgets/challengeCard";
 
 type CommunityProps = sidebarStateType & changeSidebarStateType
 export default function CommunityPage({sidebarState,changeSidebarState} : CommunityProps) {
@@ -18,9 +19,47 @@ export default function CommunityPage({sidebarState,changeSidebarState} : Commun
     },{
         title: "Healthy classic",
         image: "https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/spicy_salmon_bite_rice_16300_16x9.jpg",
-        save_amount: 460,
+        save_amount: 46000,
         ingredients: ["rice","cabbage","carrots"],
         stores: ["Tesco","Morrisons"]
+    },{
+        title: "Calorie ritual",
+        image: "https://ghc.health/cdn/shop/articles/overhead-view-unhealthy-healthy-food-background_23-2147885785.jpg?v=1623053605",
+        save_amount: 11000,
+        ingredients: ["Bread","Broccoli","bananas"],
+        stores: ["Tesco","Sainsbury"]
+    },{
+        title: "Potato fantasy",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc2uKvMxcF0pepYj80qjAEThmfGoyNQHI56T8TfRaPZdyJR7b3F3yjbjOH&s=10",
+        save_amount: 16000,
+        ingredients: ["potato","broccoli","eggs"],
+        stores: ["Tesco","Sainsbury"]
+    },{
+        title: "Protein massacre",
+        image: "https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/chipotle_chicken_burrito_82273_16x9.jpg",
+        save_amount: 186000,
+        ingredients: ["rice","cucumber","peas"],
+        stores: ["Tesco","Morrisons"]
+    }]
+    
+    const testChallengeCardData = [{
+        title: "Indian feast",
+        image: "https://cdn.prod.website-files.com/64931d2aee18510b47f4bb1f/64ecfa2dfcac3d681e0e6f36_jn1wjf4b9ykm3f0vv7k8dprrwfxt6php.png",
+        duration: "14 days",
+        challenge: "Indian cuisine",
+        description: "Try spicy indian cuisine for 2 weeks"
+    },{
+        title: "Japanese cuisine",
+        image: "https://byfood.b-cdn.net/api/public/assets/9595/content",
+        duration: "21 days",
+        challenge: "Japanese cuisine",
+        description: "Eat only japanese meals for 3 weeks"
+    },{
+        title: "Veggie graveyard",
+        image: "https://images.tgtg.ninja/standard_images/GROCERIES/D6Tu_L3chLE.jpg",
+        duration: "7 days",
+        challenge: "Vegetarian week",
+        description: "A set of highly vegetarian meals for the whole week."
     }]
     
     return(
@@ -49,7 +88,22 @@ export default function CommunityPage({sidebarState,changeSidebarState} : Commun
                        return <MyMealCard key={index} MealCardData={value}/>
                     })}
                     
+                </div>
+                <div className="px-3 mt-6 flex w-full justify-between">
+                    <div className="flex flex-row gap-2 opacity-80 items-center">
+                        <img src="/figure.run.svg" alt="popularIcon" width="16" height="16"></img>
+                        <p className="font-semibold">Challenges</p>
+                    </div>
+                    <div>
+                        <button className="text-sm opacity-70 hover:underline">See all</button>
+                    </div>
+                </div>
+                <div className="px-4 py-3 gap-4 h-fit flex w-full flex-row overflow-y-auto">
+                    {testChallengeCardData.map((value, index) => {
+                        return <MyChallengeCard key={index} ChallengeCardData={value}/>
+                    })}
                     
+
                 </div>
             </div>
             

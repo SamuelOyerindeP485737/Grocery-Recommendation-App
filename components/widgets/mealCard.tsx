@@ -54,11 +54,11 @@ export default function MyMealCard({MealCardData} : MealCardProps) {
     }
     
     return(
-        <div className="bg-(--background) h-70 w-70 flex flex-col gap-3 shadow-[0_0_18px_rgba(0,0,0,0.15)] p-1.25 pb-6 rounded-[1.125rem]">
+        <div className="bg-(--background) hover:scale-103 active:scale-101 transition-all duration-100 h-70 w-70 flex flex-col gap-3 shadow-[0_0_18px_rgba(0,0,0,0.15)] p-1.25 pb-6 rounded-[1.375rem]">
             <div className="h-[60%]">
-                <img src={MealCardData.image} alt="calorieMeal" className="w-full h-full object-cover rounded-t-[0.875rem] rounded-b-[0.375rem]"></img>
+                <img src={MealCardData.image} alt="calorieMeal" className="h-full w-full  object-cover rounded-t-[1.0625rem] rounded-b-[0.375rem]"></img>
             </div>
-            <div className="h-[40%] flex gap-3 px-1.5 flex-col">
+            <div className="h-[30%] flex gap-3 px-1.5 flex-col">
                 <div className="flex flex-row justify-between">
                     <p className="font-semibold">{MealCardData.title}</p>
                     <div className="flex flex-row items-center">

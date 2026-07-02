@@ -19,10 +19,20 @@ export default function ChangelogPage({sidebarState, changeSidebarState} : Chang
                     Changelog
                 </h2>
             </div>
-            <div className="px-3 w-full justify-center flex flex-col">
+            <div className="px-3 w-full justify-center flex flex-col gap-6">
                 <div className="flex flex-col items-center">
                     <div>
-                        <h2 className="font-semibold text-3xl py-5">Welcome to Version 0.0.1 Beta!</h2>
+                        <h2 className="font-semibold text-3xl py-5">Welcome to Version 0.0.2 Beta!</h2>
+                    </div>
+                    <div className="flex flex-col gap-3.5">
+                        <p className="px-[15%] text-center">This version features a new community page, with dynamically displayed meal plan cards and challenge cards.</p>
+                        <p className="px-[15%] text-center">This version also contains various bug fixes and Ui improvements</p>
+                    </div>
+                </div>
+                <div className="flex flex-col items-center">
+                    
+                    <div>
+                        <h2 className="font-semibold text-3xl py-5">Version 0.0.1 Beta</h2>
                     </div>
                     <div>
                         <p className="px-[15%] text-center">This is the first beta of the Grocery management system, a summer project by Samuel Oyerinde.
