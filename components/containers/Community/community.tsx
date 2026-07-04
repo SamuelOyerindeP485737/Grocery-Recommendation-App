@@ -10,7 +10,7 @@ export default function CommunityPage({sidebarState,changeSidebarState} : Commun
         changeSidebarState(!sidebarState)
     }
     
-    const testMealCardData = [{
+    const testMealCardData = [{ //Placeholders for future backend
         title: "Veggie remix",
         image: "https://www.eatingwell.com/thmb/GRsO0F0K1NLgON-cyvBFNW0EA9Y=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simple-1200-Calorie-Meal-Plan-30-Day-Week-3-horizontal-low-9f926c1f40104c459f04f3dae720236a.jpg",
         save_amount: 2600000,
@@ -42,7 +42,7 @@ export default function CommunityPage({sidebarState,changeSidebarState} : Commun
         stores: ["Tesco","Morrisons"]
     }]
     
-    const testChallengeCardData = [{
+    const testChallengeCardData = [{ //Placeholders for future backend
         title: "Indian feast",
         image: "https://cdn.prod.website-files.com/64931d2aee18510b47f4bb1f/64ecfa2dfcac3d681e0e6f36_jn1wjf4b9ykm3f0vv7k8dprrwfxt6php.png",
         duration: "14 days",
@@ -72,39 +72,44 @@ export default function CommunityPage({sidebarState,changeSidebarState} : Commun
                     Community page
                 </h2>
             </div>
-            <div className=" w-full h-fit flex flex-col">
-                <div className="px-3 flex w-full justify-between">
-                    <div className="flex flex-row gap-2 opacity-80 items-center">
-                        <img src="/chart.bar.xaxis.ascending.svg" alt="popularIcon" width="16" height="16"></img>
-                        <p className="font-semibold">Popular</p> 
+            <div className=" w-full h-fit flex flex-col gap-6">
+                <div>
+                    <div className="px-3 flex w-full justify-between">
+                        <div className="flex flex-row gap-2 opacity-80 items-center">
+                            <img src="/chart.bar.xaxis.ascending.svg" alt="popularIcon" width="16" height="16"></img>
+                            <p className="font-semibold">Popular</p>
+                        </div>
+                        <div>
+                            <button className="text-sm opacity-70 hover:underline">See all</button>
+                        </div>
                     </div>
-                    <div>
-                        <button className="text-sm opacity-70 hover:underline">See all</button>
-                    </div>
-                </div>
-                <div className="px-4 py-3 gap-4 h-fit flex w-full flex-row overflow-y-auto">
+                    <div className="px-4 py-3 gap-4 h-fit flex w-full flex-row overflow-y-auto">
 
-                    {testMealCardData.map((value, index) => {
-                       return <MyMealCard key={index} MealCardData={value}/>
-                    })}
-                    
-                </div>
-                <div className="px-3 mt-6 flex w-full justify-between">
-                    <div className="flex flex-row gap-2 opacity-80 items-center">
-                        <img src="/figure.run.svg" alt="popularIcon" width="16" height="16"></img>
-                        <p className="font-semibold">Challenges</p>
-                    </div>
-                    <div>
-                        <button className="text-sm opacity-70 hover:underline">See all</button>
-                    </div>
-                </div>
-                <div className="px-4 py-3 gap-4 h-fit flex w-full flex-row overflow-y-auto">
-                    {testChallengeCardData.map((value, index) => {
-                        return <MyChallengeCard key={index} ChallengeCardData={value}/>
-                    })}
-                    
+                        {testMealCardData.map((value, index) => {
+                            return <MyMealCard key={index} MealCardData={value}/>
+                        })}
 
+                    </div>
                 </div>
+                <div>
+                    <div className="px-3 flex w-full justify-between">
+                        <div className="flex flex-row gap-2 opacity-80 items-center">
+                            <img src="/figure.run.svg" alt="popularIcon" width="16" height="16"></img>
+                            <p className="font-semibold">Challenges</p>
+                        </div>
+                        <div>
+                            <button className="text-sm opacity-70 hover:underline">See all</button>
+                        </div>
+                    </div>
+                    <div className="px-4 py-3 gap-4 h-fit flex w-full flex-row overflow-y-auto">
+                        {testChallengeCardData.map((value, index) => {
+                            return <MyChallengeCard key={index} ChallengeCardData={value}/>
+                        })}
+                        
+
+                    </div>
+                </div>
+                
             </div>
             
         </div>
