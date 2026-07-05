@@ -16,8 +16,8 @@ export default function DashboardPlaceholder({sidebarState, chatbarState, change
     }
     
     return (
-        <div className="flex flex-1 flex-col w-full h-screen bg-(--background)">
-            <div className=" p-3 h-16 flex gap-auto justify-between">
+        <div className="relative flex flex-1 flex-col w-full h-screen bg-(--background)">
+            <div className="z-50 p-3 h-16 flex gap-auto justify-between">
                 <div className="flex gap-3 items-center">
                     <button onClick={toggleSidebarState} className={sidebarState ? "hidden" : " border-1 border-[var(--border-color)] bg-[var(--button-inactive-bg)] rounded-full p-2.5 aspect-square hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]"}>
                         <img alt="sidebarToggle" src="/sidebar.left.svg" width="18" height="18"></img>
@@ -33,7 +33,7 @@ export default function DashboardPlaceholder({sidebarState, chatbarState, change
                 </div>
 
             </div>
-            <div className="h-full w-full flex justify-center">
+            <div className="absolute h-full w-full flex justify-center">
                 <img alt="dashboardPlaceholder" src="/Fruits%20Pear%20Icon%20(1).svg" width="50" height="50" className=""></img>
             </div>
         </div>
