@@ -1,6 +1,16 @@
-namespace backend.Models;
+using backend.Models;
+namespace backend.Data;
 
-public class GMSContext
+using Microsoft.EntityFrameworkCore;
+
+public class GMSContext : DbContext
 {
+    public DbSet<ChallengeCard> ChallengeCard { get; set; }
     
+    public DbSet<MealCard> MealCard { get; set; }
+    
+    public GMSContext(DbContextOptions<GMSContext> options) : base(options)
+    {
+        
+    }
 }
