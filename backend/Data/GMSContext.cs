@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 public class GMSContext : DbContext
 {
-    public DbSet<ChallengeCard> ChallengeCard { get; set; }
+    public DbSet<Challenge> Challenge { get; set; }
     
-    public DbSet<MealCard> MealCard { get; set; }
+    public DbSet<Meal> Meal { get; set; }
     
     public GMSContext(DbContextOptions<GMSContext> options) : base(options)
     {

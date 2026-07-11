@@ -29,10 +29,11 @@ export default function ChangelogPage({sidebarState, changeSidebarState} : Chang
                         <p className="px-[15%] text-center">This version also contains various bug fixes and Ui improvements</p>
                     </div>
                 </div>
+                <hr className="mx-30 text-(--white-background-border)"></hr>
                 <div className="flex flex-col items-center">
                     
                     <div>
-                        <h2 className="font-semibold text-3xl py-5">Version 0.0.1 Beta</h2>
+                        <h2 className="font-semibold text-3xl py-5 ">Version 0.0.1 Beta</h2>
                     </div>
                     <div>
                         <p className="px-[15%] text-center">This is the first beta of the Grocery management system, a summer project by Samuel Oyerinde.
