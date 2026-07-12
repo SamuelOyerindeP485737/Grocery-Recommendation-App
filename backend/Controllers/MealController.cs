@@ -6,6 +6,13 @@ using backend.Models;
 
 public class MealController : ControllerBase
 {
+    private readonly GMSContext _context;
+
+    MealController(GMSContext context)
+    {
+        _context = context
+    }
+    
     public IActionResult GetAll()
     {
         
