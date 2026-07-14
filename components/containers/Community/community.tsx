@@ -3,12 +3,25 @@ import {changeSidebarStateType} from "@/components/containers/sidebar";
 import MyMealCard from "@/components/widgets/mealCard";
 import MyChallengeCard from "@/components/widgets/challengeCard";
 
-type CommunityProps = sidebarStateType & changeSidebarStateType
-export default function CommunityPage({sidebarState,changeSidebarState} : CommunityProps) {
+export type MealPopupStateType = {
+    mealPopupState: boolean
+}
+
+export type changeMealPopupStateType = {
+    changeMealPopupState: () => void;
+}
+
+export type ChallengePopupStateType = {
+    challengePopupState: boolean
+}
+
+export type changeChallengePopupStateTye = {
+    changeChallengePopupState: () => void;
+}
+
+type CommunityProps = sidebarStateType & changeSidebarStateType & MealPopupStateType & ChallengePopupStateType;
+export default function CommunityPage({sidebarState,changeSidebarState,mealPopupState,challengePopupState} : CommunityProps) {
     
-    function toggleSidebarState() {
-        changeSidebarState(!sidebarState)
-    }
     
     const testMealCardData = [{ //Placeholders for future backend
         title: "Veggie remix",
@@ -63,9 +76,56 @@ export default function CommunityPage({sidebarState,changeSidebarState} : Commun
     }]
     
     return(
-        <div className="h-screen flex-1 bg-(--background) min-w-0">
+        <div className="relative h-screen flex-1 bg-(--background) min-w-0">
+            <div className=" absolute z-3 inset-0 bg-black/30">
+                <div className="absolute rounded-[1.125rem] z-4 inset-15 bg-(--background) shadow-[0_0_15px_rgba(0,0,0,0.15)] transition-all duration-250">
+                    <div className="flex flex-col">
+                        
+                        <div className="w-full h-70 rounded-t-[1.125rem] bg-[url('https://www.circlehealthgroup.co.uk/-/media/circle/articles/blogs/health-matters/hero/dietary-fibre-function-recommended-intake-sources.jpg?as=1&h=418&iar=1&w=800&rev=2af7590ad31f48929dc9c1050bdd7bb2')] bg-center bg-cover">
+                            <div className="flex flex-row w-full p-1.5 justify-between">
+                                <button className="rounded-full flex aspect-square p-2.5 border border-[var(--border-color)] bg-(--background) hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]">
+                                    <img alt="backButton" src="/chevron.backward.svg" width="16" height="16"></img>
+                                </button>
+                                <button className="rounded-full p-2 border flex aspect-square border-[var(--border-color)] bg-(--background) hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]">
+                                    <img alt="backButton" src="/Enlarge%20Vector%20Icon.svg" width="20" height="20"></img>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div className="p-5">
+                            <div className="flex flex-col gap-3">
+                                <div className="flex flex-row items-center justify-between">
+                                    <h1 className="text-4xl font-semibold">Calorie ritual</h1>
+                                    <div className="flex gap-1 flex-row">
+                                        <button>
+                                            <img alt="saveButton" src="/Bookmark%20SVG%20Icon.svg" width="23" height="23"></img>
+                                        </button>
+                                        <p>11,486</p>
+                                    </div>
+                                </div>
+                                <div className="flex flex-row gap-4 opacity-60">
+                                    <div className="flex flex-row gap-2">
+                                        <img alt="calorieIcon" src="/flame.svg" width="16" height="16"></img>
+                                        <p>3200 kcal</p>
+                                    </div>
+                                    <img alt="dividerIcon" src="/Vertical%20Divider%20Icon.svg" width="5" height="16" className="object-cover"></img>
+                                    <div className="flex flex-row gap-2">
+                                        <img alt="lengthIcon" src="/calendar.svg" width="16" height="16"></img>
+                                        <p>30 days</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p>A curated set of high calorie meals to get you going</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
             <div className="flex p-3 h-16 gap-3 w-full items-center">
-                <button onClick={toggleSidebarState} className={sidebarState ? "hidden" : " border-1 border-[var(--border-color)] bg-[var(--button-inactive-bg)] rounded-full p-2.5 aspect-square hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]"}>
+                <button onClick={changeSidebarState} className={sidebarState ? "hidden" : " border-1 border-[var(--border-color)] bg-[var(--button-inactive-bg)] rounded-full p-2.5 aspect-square hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]"}>
                     <img alt="sidebarToggle" src="/sidebar.left.svg" width="18" height="18"></img>
                 </button>
                 <h2 className="text-[18px] font-semibold truncate">

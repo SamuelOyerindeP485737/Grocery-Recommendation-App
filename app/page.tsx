@@ -137,13 +137,44 @@ export type page = {
     Content: Content
 }
 
-export type ValidCategory = "Dashboard" | "Community" | "Changelog"
+const containerTogglesData = {
+    sidebarState: true,
+    chatbarState: true
+}
+
+const popupToggleData = {
+    challengeState: false,
+    mealState: false
+}
+
+type containerToggles = {
+    sidebarState: boolean,
+    chatbarState: boolean,
+}
+
+type popupToggles = {
+    challengeState: boolean,
+    mealState: boolean
+}
+
+export type ValidCategory = "Dashboard" | "Community" | "Changelog";
+
+export type validContainer = keyof containerToggles;
+
+export type validPopup = keyof popupToggles;
 
 export default function Home() {
     let [PagesData, setPagesData] = useState<typeof pagesData>(pagesData);
-    const [sidebarState, setSideState] = useState<boolean>(true);
-    const [chatbarState, setChatState] = useState<boolean>(true);
-    const [pageNumber, setPageNumber] = useState<number>(0);
+    let [containerToggles, setContainerToggle] = useState<containerToggles>(containerTogglesData);
+    let [popupToggles, setPopupToggle] = useState<popupToggles>(popupToggleData)
+    const [pageNumber, setPageNumber] = useState<number>(pagesData.length-1);
+    
+    function ToggleContainer(key: validContainer) {
+        setContainerToggle((prev) => ({
+            ...prev,[key]: !prev[key]
+        }));
+        console.log(containerToggles.sidebarState)
+    }
     
     const categoryData = {
         Dashboard: (
@@ -151,44 +182,41 @@ export default function Home() {
                 {
                     PagesData[pageNumber].response === "" ? (
                         <>
-                            <DashboardPlaceholder sidebarState={sidebarState} 
-                                                  chatbarState={chatbarState} 
-                                                  changeSidebarState={(value) => setSideState(value)} 
-                                                  changeChatbarState={(value) => setChatState(value)}/>
+                            <DashboardPlaceholder sidebarState={containerToggles.sidebarState} 
+                                                  chatbarState={containerToggles.chatbarState} 
+                                                  changeSidebarState={() => ToggleContainer("sidebarState")} 
+                                                  changeChatbarState={() => ToggleContainer("chatbarState")}/>
                         </>
                     ) : (
                         <>
                             <MyContent contentData={PagesData[pageNumber].Content}
-                                       chatbarState={chatbarState}
-                                       sidebarState={sidebarState}
-                                       changeSidebarState={(value) => setSideState(value)}
-                                       changeChatbarState={(value) => setChatState(value)}
+                                       chatbarState={containerToggles.chatbarState}
+                                       sidebarState={containerToggles.sidebarState}
+                                       changeSidebarState={() => ToggleContainer("sidebarState")}
+                                       changeChatbarState={() => ToggleContainer("chatbarState")}
                                        PageNumber={pageNumber}/>
-
-                            
                         </>
                     )
                 }
-                <MyChatbar sidebarState={sidebarState}
-                           chatbarState={chatbarState}
-                           changeSidebarState={(value) => setSideState(value)}
-                           changeChatbarState={(value) => setChatState(value)}
+                <MyChatbar sidebarState={containerToggles.sidebarState}
+                           chatbarState={containerToggles.chatbarState}
+                           changeSidebarState={() => ToggleContainer("sidebarState")}
+                           changeChatbarState={() => ToggleContainer("chatbarState")}
                            PageNumber={pageNumber}
                            chatbarPrompt={PagesData[pageNumber].prompt}
                            chatbarResponse={PagesData[pageNumber].response}
                            setChatbarPrompt={(prompt) => setPagesData((prev) => prev.map((page,index) => index === pageNumber ? {...page, prompt: prompt} : page))} SendPrompt={() => sendPromptJson()}/>
-
             </>
         ),
-        Community: (<CommunityPage sidebarState={sidebarState} changeSidebarState={(value) => setSideState(value)}/>),
-        Changelog: (<ChangelogPage sidebarState={sidebarState} changeSidebarState={(value) => setSideState(value)}/>)
+        Community: (<CommunityPage sidebarState={containerToggles.sidebarState} changeSidebarState={() => ToggleContainer("sidebarState")} mealPopupState={popupToggles.mealState} challengePopupState={popupToggles.challengeState}/>),
+        Changelog: (<ChangelogPage sidebarState={containerToggles.sidebarState} changeSidebarState={() => ToggleContainer("sidebarState")}/>)
 
     }
     
     const [currentCategory, setCurrentCategory] = useState<ValidCategory>("Dashboard")
     
     function newPage() {
-        let pageID = PagesData.length + 1
+        let pageID = PagesData.length + 1;
         const newPageData = {
             id: pageID.toString(),
             title: "New page",
@@ -243,9 +271,9 @@ export default function Home() {
     <div>
       <main className="flex p-0 w-screen h-full">
         <MySidebar pageData={PagesData} 
-                   sidebarState={sidebarState} 
+                   sidebarState={containerToggles.sidebarState} 
                    changeCategory={(value) => setCurrentCategory(value)}
-                   changeSidebarState={(value) => setSideState(value)} 
+                   changeSidebarState={() => ToggleContainer("sidebarState")} 
                    changedPageNumber={(value) => setPageNumber(value)}
                    currentCategory={currentCategory}
                    currentPage={pageNumber} 

@@ -11,7 +11,7 @@ export type sidebarStateType = {
 }
 
 export type changeSidebarStateType = {
-    changeSidebarState: (sidebarState: boolean) => void;
+    changeSidebarState: () => void;
 }
 
 type changeCategoryType = {
@@ -39,10 +39,6 @@ type MySidebarParameters = MySidebarProps & sidebarStateType & changeCategoryTyp
 
 export function MySidebar({pageData, sidebarState, changeCategory, changeSidebarState, changedPageNumber, currentCategory, currentPage, createNewPage}: MySidebarParameters) {
     
-    function toggleSidebar() {
-        changeSidebarState(!sidebarState);
-    }
-    
     function setPage(currentPage: number, category: ValidCategory) {
         if (currentCategory !== "Dashboard") {
             changeCategory(category);
@@ -61,7 +57,7 @@ export function MySidebar({pageData, sidebarState, changeCategory, changeSidebar
                    <p className="font-semibold text-xl">GMS</p>
                </div>
                 
-                <button onClick={toggleSidebar} className=" border-1 border-(--border-color) bg-white p-2.5 rounded-full justify-center align-center aspect-square flex hover:bg-gray-100 active:bg-[var(--sidebar-active)]">
+                <button onClick={changeSidebarState} className=" border-1 border-(--border-color) bg-white p-2.5 rounded-full justify-center align-center aspect-square flex hover:bg-gray-100 active:bg-[var(--sidebar-active)]">
                     <img alt="sidebarToggle" src="/sidebar.left.svg" width="18" height="18"></img>
                 </button>
             </div>
@@ -85,7 +81,7 @@ export function MySidebar({pageData, sidebarState, changeCategory, changeSidebar
             </div>
                 
             <div className="pt-3 flex flex-col overflow-y-auto px-3">
-                {pageData.map(page => (
+                {pageData.toReversed().map(page => (
                             
                     <button key={page.id} onClick={() => setPage(+page.id - 1,"Dashboard")} className={classNames({"bg-(--sidebar-active) border-1 border-(--sidebar-border-items)": currentPage == +page.id - 1 && currentCategory === "Dashboard","hover:bg-[var(--sidebar-hover)]":currentPage != +page.id - 1},"text-sm shrink-0 truncate flex align-left rounded-[1.125rem] pl-3 py-2.5 mb-1")}>
                         {page.title}

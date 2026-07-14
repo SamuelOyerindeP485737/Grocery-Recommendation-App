@@ -8,7 +8,7 @@ export type chatbarStateType = {
 }
 
 export type changeChatbarStateType = {
-    changeChatbarState: (chatbarState: boolean) => void;
+    changeChatbarState: () => void;
 }
 
 type PageNumberType = {
@@ -27,13 +27,6 @@ type ChatbarProps = sidebarStateType & chatbarStateType & changeSidebarStateType
 
 export function MyChatbar({sidebarState, chatbarState, changeSidebarState, changeChatbarState, PageNumber, chatbarPrompt, chatbarResponse, setChatbarPrompt, SendPrompt} : ChatbarProps) {
     
-    function toggleChatbarState() {
-        changeChatbarState(!chatbarState);
-    }
-    
-    function toggleSidebarState() { //Present for potential layout changes
-        changeSidebarState(!sidebarState);
-    }
     
     function sendPrompt() {
         chatbarPrompt != "" ? SendPrompt() : console.log("Prompt cannot be empty")
@@ -45,7 +38,7 @@ export function MyChatbar({sidebarState, chatbarState, changeSidebarState, chang
         <div className={SidebarClasslist}>
             <div className=" flex">
                 
-                <button onClick={toggleChatbarState} className="bg-[var(--button-inactive-bg)] p-2 border-1 border-[var(--border-color)] aspect-square rounded-full hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]">
+                <button onClick={changeChatbarState} className="bg-[var(--button-inactive-bg)] p-2 border-1 border-[var(--border-color)] aspect-square rounded-full hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]">
                     <img alt="chatToggle" src="/message.svg" width="22" height="18"/>
                 </button>
                 

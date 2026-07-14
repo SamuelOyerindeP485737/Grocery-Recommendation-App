@@ -7,5 +7,6 @@ public class ChallengeCard
     public string image { get; set; }
     public string duration { get; set; }
     public string challenge { get; set; }
-    public string description { get; set; }
+    public string shortDescription { get; set; }
+    public string longDescription { get; set; }
 }
