@@ -74,7 +74,7 @@ export function MyContent({chatbarState, sidebarState, changeSidebarState, chang
                 </div>
                 
             </div>
-            <DragSizing border="top"  className=" border-t-1 border-[var(--border-color)] h-[50%] bg-[var(--wx-background)]">
+            <DragSizing border="top"  className=" border-t-1 border-[var(--border-color)] h-[50%] bg-[var(--secondary-background)]">
                 <div className="flex">
                     <MyGanttChart ganttData={contentData.GanttChart}/>
                 </div>

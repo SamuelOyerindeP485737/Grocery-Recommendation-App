@@ -122,6 +122,7 @@
 :root {
     
     --background: #faf7f7;
+    --secondary-background: #faf0f0;
     --sidebar-background: #f8e6e6;
     --sidebar-active: #deb9b9;
     --sidebar-hover: #f3d9d9;
@@ -133,13 +134,13 @@
     --button-inactive-bg: #f6e4e4;
     --button-hover: #f3d9d9;
     --white-background-border: #debbbb;
-    --wx-background: #faf0f0 !important;
+    --wx-background: rgba(250, 240, 240, 0) !important;
     --wx-gantt-border-color: #562c2c !important;
     --barChart-item-color: #835858;
 }
 
 .wx-willow-theme {
-    --wx-background: #faf0f0 !important;
+    --wx-background: rgba(250, 240, 240, 0) !important;
     --wx-gantt-border-color: #ad9191 !important;
     --wx-color-font: white !important;
     --wx-gantt-summary-color: #835858 !important;

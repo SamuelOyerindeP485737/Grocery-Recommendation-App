@@ -2,6 +2,8 @@ import {sidebarStateType} from "@/components/containers/sidebar";
 import {changeSidebarStateType} from "@/components/containers/sidebar";
 import MyMealCard from "@/components/widgets/mealCard";
 import MyChallengeCard from "@/components/widgets/challengeCard";
+import BasicTable from "@/components/widgets/table";
+import MyGanttChart, {GanttChart} from "@/components/widgets/ganttChart";
 
 export type MealPopupStateType = {
     mealPopupState: boolean
@@ -28,31 +30,152 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
         image: "https://www.eatingwell.com/thmb/GRsO0F0K1NLgON-cyvBFNW0EA9Y=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simple-1200-Calorie-Meal-Plan-30-Day-Week-3-horizontal-low-9f926c1f40104c459f04f3dae720236a.jpg",
         save_amount: 2600000,
         ingredients: ["cabbage","cucumber"],
-        stores: ["Aldi","Tesco","Sainsbury"]
+        stores: ["Aldi","Tesco","Sainsbury"],
+        ingredient_table:[{
+            grocery_name: "Bread",
+            amount: "1 loaf",
+            cost: 1.25
+        },{
+            grocery_name: "Broccoli",
+            amount: "400g",
+            cost: 1.29
+        }],
+        meal_schedule: [{
+            parent_name: "Banana smoothie",
+            item_data: [{
+                item_name: "Banana",
+                day: 21,
+                month: 6,
+                year: 2026,
+                duration: 1
+            },{
+                item_name: "Oranges",
+                day: 21,
+                month: 6,
+                year: 2026,
+                duration: 1
+            }]
+        },{
+            parent_name: "Rice and stew",
+            item_data: [{
+                item_name: "Rice",
+                day: 22,
+                month: 6,
+                year: 2026,
+                duration: 1
+            },{
+                item_name: "Stew",
+                day: 22,
+                month: 6,
+                year: 2026,
+                duration: 1
+            }]
+        }]
     },{
         title: "Healthy classic",
         image: "https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/spicy_salmon_bite_rice_16300_16x9.jpg",
         save_amount: 46000,
         ingredients: ["rice","cabbage","carrots"],
-        stores: ["Tesco","Morrisons"]
+        stores: ["Tesco","Morrisons"],
+        ingredient_table:[{
+            grocery_name: "Water",
+            amount: "1 bottle",
+            cost: 3.99
+        }],
+        meal_schedule: [{
+            parent_name: "Banana smoothie",
+            item_data: [{
+                item_name: "Banana",
+                day: 21,
+                month: 6,
+                year: 2026,
+                duration: 1
+            }]
+        }]
     },{
         title: "Calorie ritual",
         image: "https://ghc.health/cdn/shop/articles/overhead-view-unhealthy-healthy-food-background_23-2147885785.jpg?v=1623053605",
         save_amount: 11000,
         ingredients: ["Bread","Broccoli","bananas"],
-        stores: ["Tesco","Sainsbury"]
+        stores: ["Tesco","Sainsbury"],
+        ingredient_table:[{
+            grocery_name: "Water",
+            amount: "1 bottle",
+            cost: 3.99
+        }],
+        meal_schedule: [{
+            parent_name: "Banana smoothie",
+            item_data: [{
+                item_name: "Banana",
+                day: 21,
+                month: 6,
+                year: 2026,
+                duration: 1
+            }]
+        }]
     },{
         title: "Potato fantasy",
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc2uKvMxcF0pepYj80qjAEThmfGoyNQHI56T8TfRaPZdyJR7b3F3yjbjOH&s=10",
         save_amount: 16000,
         ingredients: ["potato","broccoli","eggs"],
-        stores: ["Tesco","Sainsbury"]
+        stores: ["Tesco","Sainsbury"],
+        ingredient_table:[{
+            grocery_name: "Water",
+            amount: "1 bottle",
+            cost: 3.99
+        }],
+        meal_schedule: [{
+            parent_name: "Banana smoothie",
+            item_data: [{
+                item_name: "Banana",
+                day: 21,
+                month: 6,
+                year: 2026,
+                duration: 1
+            }]
+        }]
     },{
         title: "Protein massacre",
         image: "https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/chipotle_chicken_burrito_82273_16x9.jpg",
         save_amount: 186000,
         ingredients: ["rice","cucumber","peas"],
-        stores: ["Tesco","Morrisons"]
+        stores: ["Tesco","Morrisons"],
+        ingredient_table:[{
+            grocery_name: "Water",
+            amount: "1 bottle",
+            cost: 3.99
+        }],
+        meal_schedule: [{
+            parent_name: "Banana smoothie",
+            item_data: [{
+                item_name: "Banana",
+                day: 21,
+                month: 6,
+                year: 2026,
+                duration: 1
+            },{
+                item_name: "Oranges",
+                day: 21,
+                month: 6,
+                year: 2026,
+                duration: 1
+            }]
+        },{
+            parent_name: "Rice and stew",
+            item_data: [{
+                item_name: "Rice",
+                day: 22,
+                month: 6,
+                year: 2026,
+                duration: 1
+            },{
+                item_name: "Stew",
+                day: 22,
+                month: 6,
+                year: 2026,
+                duration: 1
+            }]
+        }]
     }]
     
     const testChallengeCardData = [{ //Placeholders for future backend
@@ -77,11 +200,11 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
     
     return(
         <div className="relative h-screen flex-1 bg-(--background) min-w-0">
-            <div className=" absolute z-3 inset-0 bg-black/30">
-                <div className="absolute rounded-[1.125rem] z-4 inset-15 bg-(--background) shadow-[0_0_15px_rgba(0,0,0,0.15)] transition-all duration-250">
-                    <div className="flex flex-col">
+            <div className=" absolute z-3 min-h-60 inset-0 bg-black/30">
+                <div className=" absolute rounded-[1.125rem] min-w-100 min-h-40 z-4 inset-x-[10%] inset-y-15 bg-(--background) shadow-[0_0_15px_rgba(0,0,0,0.15)] transition-all duration-250">
+                    <div className="h-full rounded-[1.125rem] overflow-y-auto flex flex-col">
                         
-                        <div className="w-full h-70 rounded-t-[1.125rem] bg-[url('https://www.circlehealthgroup.co.uk/-/media/circle/articles/blogs/health-matters/hero/dietary-fibre-function-recommended-intake-sources.jpg?as=1&h=418&iar=1&w=800&rev=2af7590ad31f48929dc9c1050bdd7bb2')] bg-center bg-cover">
+                        <div className="w-full shrink-0 h-70 rounded-t-[1.125rem] bg-[url('https://www.circlehealthgroup.co.uk/-/media/circle/articles/blogs/health-matters/hero/dietary-fibre-function-recommended-intake-sources.jpg?as=1&h=418&iar=1&w=800&rev=2af7590ad31f48929dc9c1050bdd7bb2')] bg-center bg-cover">
                             <div className="flex flex-row w-full p-1.5 justify-between">
                                 <button className="rounded-full flex aspect-square p-2.5 border border-[var(--border-color)] bg-(--background) hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]">
                                     <img alt="backButton" src="/chevron.backward.svg" width="16" height="16"></img>
@@ -95,7 +218,7 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
                         <div className="p-5">
                             <div className="flex flex-col gap-3">
                                 <div className="flex flex-row items-center justify-between">
-                                    <h1 className="text-4xl font-semibold">Calorie ritual</h1>
+                                    <h1 className="text-4xl font-semibold truncate">Calorie ritual</h1>
                                     <div className="flex gap-1 flex-row">
                                         <button>
                                             <img alt="saveButton" src="/Bookmark%20SVG%20Icon.svg" width="23" height="23"></img>
@@ -110,12 +233,30 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
                                     </div>
                                     <img alt="dividerIcon" src="/Vertical%20Divider%20Icon.svg" width="5" height="16" className="object-cover"></img>
                                     <div className="flex flex-row gap-2">
-                                        <img alt="lengthIcon" src="/calendar.svg" width="16" height="16"></img>
+                                        <img alt="lengthIcon" src="/clock.svg" width="16" height="16"></img>
                                         <p>30 days</p>
                                     </div>
                                 </div>
                                 <div>
                                     <p>A curated set of high calorie meals to get you going</p>
+                                </div>
+                            </div>
+                            <div className="mt-12 flex flex-col gap-2">
+                                <div className="flex flex-row gap-2 opacity-90">
+                                    <h2 className="text-xl font-medium">Ingredients</h2>
+                                    <img alt="IngredientsIcon" src="/carrot.fill.svg" width="20" height="20"></img>
+                                </div>
+                                <div>
+                                    <BasicTable tableData={testMealCardData[0].ingredient_table}/>
+                                </div>
+                            </div>
+                            <div className="mt-12 flex flex-col gap-2">
+                                <div className="flex flex-row opacity-90 gap-2">
+                                    <h2 className="text-xl font-medium">Schedule</h2>
+                                    <img alt="scheduleIcon" src="/calendar.svg" width="20" height="20"></img>
+                                </div>
+                                <div className="flex">
+                                    <MyGanttChart ganttData={testMealCardData[0].meal_schedule}/>
                                 </div>
                             </div>
                         </div>
