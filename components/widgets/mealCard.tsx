@@ -1,13 +1,19 @@
-export type MealCardType = {
+import {table} from "@/components/widgets/table";
+import {GanttChart} from "@/components/widgets/ganttChart";
+
+
+export type MealType = {
     title: string,
     image: string,
     save_amount: number,
     ingredients: string[],
-    stores: string[]
+    stores: string[],
+    ingredient_table: table[],
+    meal_schedule: GanttChart[]
 }
 
 type MealCardProps = {
-    MealCardData: MealCardType
+    MealCardData: MealType
 }
 
 export default function MyMealCard({MealCardData} : MealCardProps) {

@@ -9,6 +9,8 @@ import {table} from "@/components/widgets/table";
 import CommunityPage from "@/components/containers/Community/community";
 import ChangelogPage from "@/components/containers/Changelog/changelog";
 import DashboardPlaceholder from "@/components/containers/Dashboard/placeholder";
+import {mealPopupStateType} from "@/components/widgets/Community/mealPopup";
+import {challengePopupStateType} from "@/components/widgets/Community/challengePopup";
 
 
 
@@ -143,8 +145,14 @@ const containerTogglesData = {
 }
 
 const popupToggleData = {
-    challengeState: false,
-    mealState: false
+    challengePopup: {
+        openState: false,
+        fullscreen: false,
+    },
+    mealPopup: {
+        openState: true,
+        fullscreen: false
+    }
 }
 
 type containerToggles = {
@@ -153,15 +161,15 @@ type containerToggles = {
 }
 
 type popupToggles = {
-    challengeState: boolean,
-    mealState: boolean
+    challengePopup: challengePopupStateType,
+    mealPopup: mealPopupStateType
 }
 
 export type ValidCategory = "Dashboard" | "Community" | "Changelog";
 
 export type validContainer = keyof containerToggles;
 
-export type validPopup = keyof popupToggles;
+export type validPopup = keyof popupToggles[keyof popupToggles];
 
 export default function Home() {
     let [PagesData, setPagesData] = useState<typeof pagesData>(pagesData);
@@ -174,6 +182,20 @@ export default function Home() {
             ...prev,[key]: !prev[key]
         }));
         console.log(containerToggles.sidebarState)
+    }
+    
+    
+    function togglePopup(popupName: keyof popupToggles, popupType: validPopup) {
+        setPopupToggle((prev) => ({
+            ...prev,[popupName]: {
+                ...prev[popupName],[popupType]: !prev[popupName][popupType]
+            }
+        }))
+    }
+    
+    const MealTogglePopupFunctions = {
+        ChangeOpenState: () => {togglePopup("mealPopup","openState")},
+        ChangeFullScreen: () => {togglePopup("mealPopup","fullscreen")}
     }
     
     const categoryData = {
@@ -208,7 +230,7 @@ export default function Home() {
                            setChatbarPrompt={(prompt) => setPagesData((prev) => prev.map((page,index) => index === pageNumber ? {...page, prompt: prompt} : page))} SendPrompt={() => sendPromptJson()}/>
             </>
         ),
-        Community: (<CommunityPage sidebarState={containerToggles.sidebarState} changeSidebarState={() => ToggleContainer("sidebarState")} mealPopupState={popupToggles.mealState} challengePopupState={popupToggles.challengeState}/>),
+        Community: (<CommunityPage sidebarState={containerToggles.sidebarState} changeSidebarState={() => ToggleContainer("sidebarState")} mealPopupStates={popupToggles.mealPopup} challengePopupStates={popupToggles.challengePopup} ChangeState={MealTogglePopupFunctions}/>),
         Changelog: (<ChangelogPage sidebarState={containerToggles.sidebarState} changeSidebarState={() => ToggleContainer("sidebarState")}/>)
 
     }
