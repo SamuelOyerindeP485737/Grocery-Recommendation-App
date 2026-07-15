@@ -16,6 +16,14 @@ type ChangeMealPopupState = {
     ChangeFullScreen: () => void;
 }
 
+export type ChangeMealPopupPage = {
+    ChangePageNumber: (PageNumber: number) => void;
+}
+
+export type MealPopupPageType = {
+    MealPopupPageNumber: number
+}
+
 export type ChangeMealPopup = {
     ChangeState: ChangeMealPopupState
 }
@@ -35,9 +43,9 @@ export default function MyMealPopup({mealPopupStates, MealData, ChangeState} : m
             <div className={classNames({"rounded-0 inset-0 shadow-none":mealPopupStates.fullscreen},{"rounded-[1.375rem] inset-x-[10%] inset-y-15 shadow-[0_0_15px_rgba(0,0,0,0.15)]":!mealPopupStates.fullscreen},"absolute min-w-100 min-h-40 z-4 overflow-clip bg-(--background)  transition-all ease-out duration-150")}>
                 <div className="h-full overflow-y-auto flex flex-col">
 
-                    <div className="w-full shrink-0 h-70  bg-[url('https://www.circlehealthgroup.co.uk/-/media/circle/articles/blogs/health-matters/hero/dietary-fibre-function-recommended-intake-sources.jpg?as=1&h=418&iar=1&w=800&rev=2af7590ad31f48929dc9c1050bdd7bb2')] bg-center bg-cover">
-                        <div className="flex flex-row w-full p-3 justify-between">
-                            <button onClick={ChangeState.ChangeOpenState} className="rounded-full flex aspect-square p-2.5 border border-[var(--border-color)] bg-(--background) hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]">
+                    <div style={{backgroundImage: `url(${MealData.image})`}} className={`w-full shrink-0 h-70 bg-center bg-cover`}>
+                        <div className=" flex flex-row w-full p-3 justify-between">
+                            <button onClick={ChangeState.ChangeOpenState} className=" rounded-full flex aspect-square p-2.5 border border-[var(--border-color)] bg-(--background) hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]">
                                 <BackIcon width={16} height={16}/>
                             </button>
                             <button onClick={ChangeState.ChangeFullScreen} className="rounded-full p-2 border flex aspect-square border-[var(--border-color)] bg-(--background) hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]">
@@ -49,7 +57,7 @@ export default function MyMealPopup({mealPopupStates, MealData, ChangeState} : m
                     <div className="p-5">
                         <div className="flex flex-col gap-3">
                             <div className="flex flex-row items-center justify-between">
-                                <h1 className="text-4xl font-semibold truncate">Calorie ritual</h1>
+                                <h1 className="text-4xl font-semibold truncate">{MealData.title}</h1>
                                 <div className="flex gap-1 flex-row">
                                     <button>
                                         <BookmarkIcon width={23} height={23}/>

@@ -17,7 +17,7 @@ import {challengePopupStateType} from "@/components/widgets/Community/challengeP
 const pagesData = [
     {
         id: "1",
-        title: "Page 1",
+        title: "New page",
         prompt: "",
         response: "",
         Content: {
@@ -54,7 +54,7 @@ const pagesData = [
     },
     {
         id: "2",
-        title: "Page 2",
+        title: "New page",
         prompt: "",
         response: "",
         Content: {
@@ -82,7 +82,7 @@ const pagesData = [
     }, 
     {
         id: "3",
-        title: "page 3",
+        title: "New page",
         prompt: "",
         response: "",
         Content: {
@@ -176,6 +176,7 @@ export default function Home() {
     let [containerToggles, setContainerToggle] = useState<containerToggles>(containerTogglesData);
     let [popupToggles, setPopupToggle] = useState<popupToggles>(popupToggleData)
     const [pageNumber, setPageNumber] = useState<number>(pagesData.length-1);
+    const [popupPageNumber, setPopupPageNumber] = useState<number>(1);
     
     function ToggleContainer(key: validContainer) {
         setContainerToggle((prev) => ({
@@ -230,7 +231,7 @@ export default function Home() {
                            setChatbarPrompt={(prompt) => setPagesData((prev) => prev.map((page,index) => index === pageNumber ? {...page, prompt: prompt} : page))} SendPrompt={() => sendPromptJson()}/>
             </>
         ),
-        Community: (<CommunityPage sidebarState={containerToggles.sidebarState} changeSidebarState={() => ToggleContainer("sidebarState")} mealPopupStates={popupToggles.mealPopup} challengePopupStates={popupToggles.challengePopup} ChangeState={MealTogglePopupFunctions}/>),
+        Community: (<CommunityPage sidebarState={containerToggles.sidebarState} changeSidebarState={() => ToggleContainer("sidebarState")} mealPopupStates={popupToggles.mealPopup} challengePopupStates={popupToggles.challengePopup} ChangeState={MealTogglePopupFunctions} MealPopupPageNumber={popupPageNumber} ChangePageNumber={(value) => {setPopupPageNumber(value)}}/>),
         Changelog: (<ChangelogPage sidebarState={containerToggles.sidebarState} changeSidebarState={() => ToggleContainer("sidebarState")}/>)
 
     }

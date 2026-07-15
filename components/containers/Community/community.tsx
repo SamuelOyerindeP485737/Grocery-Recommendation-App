@@ -5,20 +5,16 @@ import MyChallengeCard from "@/components/widgets/challengeCard";
 import BasicTable from "@/components/widgets/table";
 import MyGanttChart, {GanttChart} from "@/components/widgets/ganttChart";
 import {challengePopupStateData, challengePopupStateType} from "@/components/widgets/Community/challengePopup";
-import MyMealPopup, {ChangeMealPopup, mealPopupStateData} from "@/components/widgets/Community/mealPopup";
+import MyMealPopup, {
+    ChangeMealPopup,
+    ChangeMealPopupPage, MealPopupPageType,
+    mealPopupStateData
+} from "@/components/widgets/Community/mealPopup";
 
-export type changeMealPopupStateType = {
-    changeMealPopupState: () => void;
-}
 
 
-
-export type changeChallengePopupStateTye = {
-    changeChallengePopupState: () => void;
-}
-
-type CommunityProps = sidebarStateType & changeSidebarStateType & mealPopupStateData & challengePopupStateData & ChangeMealPopup;
-export default function CommunityPage({sidebarState,changeSidebarState,mealPopupStates,challengePopupStates, ChangeState} : CommunityProps) {
+type CommunityProps = sidebarStateType & changeSidebarStateType & mealPopupStateData & challengePopupStateData & ChangeMealPopup & ChangeMealPopupPage & MealPopupPageType;
+export default function CommunityPage({sidebarState,changeSidebarState,mealPopupStates,challengePopupStates, ChangeState, ChangePageNumber, MealPopupPageNumber} : CommunityProps) {
     
     
     const testMealCardData = [{ //Placeholders for future backend
@@ -238,7 +234,7 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
     
     return(
         <div className="relative h-screen flex-1 bg-(--background) min-w-0">
-            <MyMealPopup mealPopupStates={mealPopupStates} MealData={testMealCardData[0]} ChangeState={ChangeState}/>
+            <MyMealPopup mealPopupStates={mealPopupStates} MealData={testMealCardData[MealPopupPageNumber]} ChangeState={ChangeState}/>
             
             <div className="flex p-3 h-16 gap-3 w-full items-center">
                 <button onClick={changeSidebarState} className={sidebarState ? "hidden" : " border-1 border-[var(--border-color)] bg-[var(--button-inactive-bg)] rounded-full p-2.5 aspect-square hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]"}>
@@ -262,7 +258,7 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
                     <div className="px-4 py-3 gap-4 h-fit flex w-full flex-row overflow-y-auto">
 
                         {testMealCardData.map((value, index) => {
-                            return <MyMealCard key={index} MealCardData={value}/>
+                            return <MyMealCard ChangeState={ChangeState} key={index} ID={index} MealCardData={value} ChangePageNumber={ChangePageNumber}/>
                         })}
 
                     </div>
