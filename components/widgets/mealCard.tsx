@@ -6,7 +6,9 @@ export type MealType = {
     title: string,
     image: string,
     save_amount: number,
-    ingredients: string[],
+    duration: string,
+    calorie_amount: number,
+    description: string,
     stores: string[],
     ingredient_table: table[],
     meal_schedule: GanttChart[]
@@ -21,13 +23,13 @@ export default function MyMealCard({MealCardData} : MealCardProps) {
     function DisplayIngredients() {
         let IngredientList = ""
         
-        MealCardData.ingredients.forEach((value,index) => {
+        MealCardData.ingredient_table.forEach((value,index) => {
             
             if (index > 0) {
-                IngredientList += ", " + value
+                IngredientList += ", " + value.grocery_name
             }
             else {
-                IngredientList += value
+                IngredientList += value.grocery_name
             }
         })
         return IngredientList
@@ -53,7 +55,7 @@ export default function MyMealCard({MealCardData} : MealCardProps) {
         let savesAmount
         
         let index = Math.floor(Math.log(savesValue)/Math.log(1000))
-        savesValue = Math.round(savesValue/1000**Math.floor(Math.log(savesValue)/Math.log(1000)) * 100)/100
+        savesValue = Math.round(savesValue/1000**Math.floor(Math.log(savesValue)/Math.log(1000)) * 10)/10
         
         savesAmount = savesValue.toString() + savesUnits[index]
         return savesAmount

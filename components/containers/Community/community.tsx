@@ -24,15 +24,17 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
     const testMealCardData = [{ //Placeholders for future backend
         title: "Veggie remix",
         image: "https://www.eatingwell.com/thmb/GRsO0F0K1NLgON-cyvBFNW0EA9Y=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simple-1200-Calorie-Meal-Plan-30-Day-Week-3-horizontal-low-9f926c1f40104c459f04f3dae720236a.jpg",
-        save_amount: 2600000,
-        ingredients: ["cabbage","cucumber"],
+        save_amount: 2631240,
+        duration: "30 days",
+        calorie_amount: 2200,
+        description: "A curated set of high calorie meals to get you going",
         stores: ["Aldi","Tesco","Sainsbury"],
         ingredient_table:[{
-            grocery_name: "Bread",
+            grocery_name: "Cabbage",
             amount: "1 loaf",
             cost: 1.25
         },{
-            grocery_name: "Broccoli",
+            grocery_name: "Cucumber",
             amount: "400g",
             cost: 1.29
         }],
@@ -70,12 +72,22 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
     },{
         title: "Healthy classic",
         image: "https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/spicy_salmon_bite_rice_16300_16x9.jpg",
-        save_amount: 46000,
-        ingredients: ["rice","cabbage","carrots"],
+        save_amount: 46213,
+        duration: "30 days",
+        calorie_amount: 2200,
+        description: "A curated set of high calorie meals to get you going",
         stores: ["Tesco","Morrisons"],
         ingredient_table:[{
-            grocery_name: "Water",
+            grocery_name: "Rice",
             amount: "1 bottle",
+            cost: 3.99
+        },{
+            grocery_name: "Cabbage",
+            amount: "1 bag",
+            cost: 3.99
+        },{
+            grocery_name: "Carrots",
+            amount: "1 pack",
             cost: 3.99
         }],
         meal_schedule: [{
@@ -92,10 +104,20 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
         title: "Calorie ritual",
         image: "https://ghc.health/cdn/shop/articles/overhead-view-unhealthy-healthy-food-background_23-2147885785.jpg?v=1623053605",
         save_amount: 11000,
-        ingredients: ["Bread","Broccoli","bananas"],
+        duration: "30 days",
+        calorie_amount: 2200,
+        description: "A curated set of high calorie meals to get you going",
         stores: ["Tesco","Sainsbury"],
         ingredient_table:[{
-            grocery_name: "Water",
+            grocery_name: "Bread",
+            amount: "1 bottle",
+            cost: 3.99
+        },{
+            grocery_name: "Broccoli",
+            amount: "1 bottle",
+            cost: 3.99
+        },{
+            grocery_name: "Bananas",
             amount: "1 bottle",
             cost: 3.99
         }],
@@ -113,10 +135,20 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
         title: "Potato fantasy",
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc2uKvMxcF0pepYj80qjAEThmfGoyNQHI56T8TfRaPZdyJR7b3F3yjbjOH&s=10",
         save_amount: 16000,
-        ingredients: ["potato","broccoli","eggs"],
+        duration: "30 days",
+        calorie_amount: 2200,
+        description: "A curated set of high calorie meals to get you going",
         stores: ["Tesco","Sainsbury"],
         ingredient_table:[{
-            grocery_name: "Water",
+            grocery_name: "Potato",
+            amount: "1 bottle",
+            cost: 3.99
+        },{
+            grocery_name: "Broccoli",
+            amount: "1 bottle",
+            cost: 3.99
+        },{
+            grocery_name: "Eggs",
             amount: "1 bottle",
             cost: 3.99
         }],
@@ -133,11 +165,21 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
     },{
         title: "Protein massacre",
         image: "https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/chipotle_chicken_burrito_82273_16x9.jpg",
-        save_amount: 186000,
-        ingredients: ["rice","cucumber","peas"],
+        save_amount: 186512,
+        duration: "30 days",
+        calorie_amount: 2200,
+        description: "A curated set of high calorie meals to get you going",
         stores: ["Tesco","Morrisons"],
         ingredient_table:[{
-            grocery_name: "Water",
+            grocery_name: "Rice",
+            amount: "1 bottle",
+            cost: 3.99
+        },{
+            grocery_name: "Cucumber",
+            amount: "1 bottle",
+            cost: 3.99
+        },{
+            grocery_name: "Peas",
             amount: "1 bottle",
             cost: 3.99
         }],
