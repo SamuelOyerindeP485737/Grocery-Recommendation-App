@@ -100,8 +100,8 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
         title: "Calorie ritual",
         image: "https://ghc.health/cdn/shop/articles/overhead-view-unhealthy-healthy-food-background_23-2147885785.jpg?v=1623053605",
         save_amount: 11000,
-        duration: "30 days",
-        calorie_amount: 2200,
+        duration: "2 weeks",
+        calorie_amount: 5300,
         description: "A curated set of high calorie meals to get you going",
         stores: ["Tesco","Sainsbury"],
         ingredient_table:[{

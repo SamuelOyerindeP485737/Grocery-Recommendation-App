@@ -12,7 +12,7 @@ type ChallengeCardProps = {
 export default function MyChallengeCard({ChallengeCardData}: ChallengeCardProps) {
     //Modify icons globally for dark theme support
     return(
-        <div style={{backgroundImage: `url(${ChallengeCardData.image})`}} className={`relative bg-cover shadow-[0_0_15px_rgba(0,0,0,0.20)] w-120 flex flex-row rounded-[1.4375rem] shrink-0 hover:scale-102 transition-all duration-100 text-white p-2.5 h-70`}>
+        <div style={{backgroundImage: `url('${ChallengeCardData.image}')`}} className={`relative bg-cover shadow-[0_0_15px_rgba(0,0,0,0.20)] w-120 flex flex-row rounded-[1.4375rem] shrink-0 hover:scale-102 transition-all duration-100 text-white p-2.5 h-70`}>
                 <div className="absolute inset-0 bg-black/40 rounded-[1.4375rem]"></div>
                 <div className="z-2 w-[70%] flex flex-col justify-end gap-3 mb-3">
                     <h2 className="text-3xl font-semibold">{ChallengeCardData.title}</h2>
