@@ -39,8 +39,8 @@ type MealTypeData = {
 type mealPopupProps = mealPopupStateData & MealTypeData & ChangeMealPopup
 export default function MyMealPopup({mealPopupStates, MealData, ChangeState} : mealPopupProps) {
     return(
-        <div className={classNames({"hidden":!mealPopupStates.openState},"absolute z-3 min-h-60 inset-0 bg-black/30")}>
-            <div className={classNames({"rounded-0 inset-0 shadow-none":mealPopupStates.fullscreen},{"rounded-[1.375rem] inset-x-[10%] inset-y-15 shadow-[0_0_15px_rgba(0,0,0,0.15)]":!mealPopupStates.fullscreen},"absolute min-w-100 min-h-40 z-4 overflow-clip bg-(--background)  transition-all ease-out duration-150")}>
+        <div className={classNames({"opacity-0 pointer-events-none":!mealPopupStates.openState},"pointer-events-auto transition-all duration-150 absolute z-3 min-h-60 inset-0 bg-black/30")}>
+            <div className={classNames({"rounded-0 inset-0 shadow-none":mealPopupStates.fullscreen,"rounded-[1.375rem] inset-x-[10%] inset-y-15 shadow-[0_0_15px_rgba(0,0,0,0.15)]":!mealPopupStates.fullscreen},{"scale-100":mealPopupStates.openState,"scale-80":!mealPopupStates.openState},"absolute min-w-100 min-h-40 z-4 overflow-clip bg-(--background) transition-all ease-out duration-150")}>
                 <div className=" h-full overflow-y-auto flex flex-col">
 
                     <div style={{backgroundImage: `url('${MealData.image}')`}} className={` w-full shrink-0 h-70 bg-center bg-cover`}>

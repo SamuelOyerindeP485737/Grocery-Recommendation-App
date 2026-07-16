@@ -75,7 +75,7 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
         stores: ["Tesco","Morrisons"],
         ingredient_table:[{
             grocery_name: "Rice",
-            amount: "1 bottle",
+            amount: "1 bag",
             cost: 3.99
         },{
             grocery_name: "Cabbage",
@@ -83,7 +83,7 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
             cost: 3.99
         },{
             grocery_name: "Carrots",
-            amount: "1 pack",
+            amount: "5 pcs",
             cost: 3.99
         }],
         meal_schedule: [{
@@ -102,7 +102,7 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
         save_amount: 11000,
         duration: "2 weeks",
         calorie_amount: 5300,
-        description: "A curated set of high calorie meals to get you going",
+        description: "A curated set of high calorie meals to get you going.",
         stores: ["Tesco","Sainsbury"],
         ingredient_table:[{
             grocery_name: "Bread",
@@ -133,7 +133,7 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
         save_amount: 16000,
         duration: "30 days",
         calorie_amount: 2200,
-        description: "A curated set of high calorie meals to get you going",
+        description: `"Anything that can have a potato, will have a potato", a quote perfectly describing this 1 month long meal plan filled with nutritious potato centric meals.`,
         stores: ["Tesco","Sainsbury"],
         ingredient_table:[{
             grocery_name: "Potato",
