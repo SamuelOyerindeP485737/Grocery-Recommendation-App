@@ -1,5 +1,6 @@
 import { Gantt, Willow } from "@svar-ui/react-gantt";
 import "@svar-ui/react-gantt/all.css";
+import {memo} from "react";
 
 type item_data = {
     item_name: string,
@@ -29,7 +30,7 @@ type itemType = {
 }
 
 type MyGanttProps = GanttChartData
-export default function MyGanttChart({ganttData} : MyGanttProps) {
+ function MyGanttChart({ganttData} : MyGanttProps) {
 
     let dynamicTasks : itemType[] = []
     let parentIndex = 1
@@ -62,9 +63,10 @@ export default function MyGanttChart({ganttData} : MyGanttProps) {
   const columns = [
       {id: "text",header: "Grocery name", width:"220"}
   ];
-
+    
+  
   return (
-      <div style={{width:"250px"}} className="flex-1 h-full min-w-0">
+      <div style={{width:"250px", flex: 1}} className="h-full min-w-0">
           <Willow>
               <Gantt tasks={dynamicTasks} links={links} columns={[{id: "text",header: "Meal", width:220},{id: "start",header: "Start date",width:100},{id: "duration", header: "duration (days)",width:160}]}/>
           </Willow>
@@ -72,3 +74,4 @@ export default function MyGanttChart({ganttData} : MyGanttProps) {
     
   );
 }
+export default memo(MyGanttChart)

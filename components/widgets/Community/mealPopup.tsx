@@ -76,7 +76,7 @@ export default function MyMealPopup({mealPopupStates, MealData, ChangeState} : m
                             </button>
                         </div>
                         
-                        <div  style={{
+                        <div style={{
                             backgroundImage: `url('${MealData.image}')`,
                             transform: `translateY(${Math.max(-1000,(-scrollY)/2)}px)`
                         }} className={`sticky top-0 w-full shrink-0 h-70 bg-center bg-cover`} />
