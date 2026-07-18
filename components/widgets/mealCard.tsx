@@ -20,7 +20,7 @@ type MealCardProps = {
     ID: number
 } & ChangeMealPopup & ChangeMealPopupPage
 
-export default function MyMealCard({MealCardData, ID, ChangeState, ChangePageNumber} : MealCardProps) {
+export default function MyMealCard({MealCardData, ID, ChangeMealState, ChangePageNumber} : MealCardProps) {
     
     function DisplayIngredients() {
         let IngredientList = ""
@@ -65,7 +65,7 @@ export default function MyMealCard({MealCardData, ID, ChangeState, ChangePageNum
     
     function openCard(id: number) {
         ChangePageNumber(id);
-        ChangeState.ChangeOpenState();
+        ChangeMealState.ChangeOpenState();
     }
     
     return(

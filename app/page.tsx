@@ -146,11 +146,11 @@ const containerTogglesData = {
 
 const popupToggleData = {
     challengePopup: {
-        openState: false,
+        openState: true,
         fullscreen: false,
     },
     mealPopup: {
-        openState: true,
+        openState: false,
         fullscreen: false
     }
 }
@@ -195,8 +195,15 @@ export default function Home() {
     }
     
     const MealTogglePopupFunctions = {
-        ChangeOpenState: () => {togglePopup("mealPopup","openState")},
-        ChangeFullScreen: () => {togglePopup("mealPopup","fullscreen")}
+        ChangeMealState: {
+            ChangeOpenState: () => {togglePopup("mealPopup","openState")},
+            ChangeFullScreen: () => {togglePopup("mealPopup","fullscreen")}
+        },
+        ChangeChallengeState: {
+            ChangeOpenState: () => {togglePopup("challengePopup","openState")},
+            ChangeFullScreen: () => {togglePopup("challengePopup","fullscreen")}
+        }
+        
     }
     
     const categoryData = {

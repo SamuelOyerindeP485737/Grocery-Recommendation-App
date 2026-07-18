@@ -26,7 +26,7 @@ export type MealPopupPageType = {
 }
 
 export type ChangeMealPopup = {
-    ChangeState: ChangeMealPopupState
+    ChangeMealState: ChangeMealPopupState
 }
 
 export type mealPopupStateData = {
@@ -38,7 +38,7 @@ type MealTypeData = {
 }
 
 type mealPopupProps = mealPopupStateData & MealTypeData & ChangeMealPopup
-export default function MyMealPopup({mealPopupStates, MealData, ChangeState} : mealPopupProps) {
+export default function MyMealPopup({mealPopupStates, MealData, ChangeMealState} : mealPopupProps) {
     const [scrollY,setScrollY] = useState<number>(0);
     const popupRef = useRef<HTMLDivElement>(null);
 
@@ -61,17 +61,17 @@ export default function MyMealPopup({mealPopupStates, MealData, ChangeState} : m
     
     
     return(
-        <div onClick={ChangeState.ChangeOpenState} className={classNames({"opacity-0 pointer-events-none":!mealPopupStates.openState},"pointer-events-auto transition-all duration-150 absolute z-3 min-h-60 inset-0 bg-black/30")}>
+        <div onClick={ChangeMealState.ChangeOpenState} className={classNames({"opacity-0 pointer-events-none":!mealPopupStates.openState},"pointer-events-auto transition-all duration-150 absolute z-3 min-h-60 inset-0 bg-black/30")}>
             <div onClick={(e) => e.stopPropagation()} className={classNames({"rounded-0 inset-0 shadow-none":mealPopupStates.fullscreen,"rounded-[1.375rem] inset-x-[10%] inset-y-15 shadow-[0_0_15px_rgba(0,0,0,0.15)]":!mealPopupStates.fullscreen},{"scale-100":mealPopupStates.openState,"scale-80":!mealPopupStates.openState},"absolute min-w-100 min-h-40 z-4 overflow-clip bg-(--background) transition-all ease-out duration-150")}>
                 <div className="h-full relative">
                     <div ref={popupRef} className=" h-full overflow-y-auto flex flex-col">
     
                         
                         <div className="absolute z-6 top-0 flex flex-row w-full p-3 justify-between">
-                            <button onClick={ChangeState.ChangeOpenState} className=" rounded-full flex aspect-square p-2.5 border border-[var(--border-color)] bg-(--background) hover:bg-[var(--sidebar-hover)] shadow-[0_0_15px_rgba(0,0,0,0.15)] active:bg-[var(--sidebar-active)]">
+                            <button onClick={ChangeMealState.ChangeOpenState} className=" rounded-full flex aspect-square p-2.5 border border-[var(--border-color)] bg-(--background) hover:bg-[var(--sidebar-hover)] shadow-[0_0_15px_rgba(0,0,0,0.15)] active:bg-[var(--sidebar-active)]">
                                 <BackIcon width={16} height={16} />
                             </button>
-                            <button onClick={ChangeState.ChangeFullScreen} className="rounded-full p-2 border flex aspect-square border-[var(--border-color)] bg-(--background) hover:bg-[var(--sidebar-hover)] shadow-[0_0_15px_rgba(0,0,0,0.15)] active:bg-[var(--sidebar-active)]">
+                            <button onClick={ChangeMealState.ChangeFullScreen} className="rounded-full p-2 border flex aspect-square border-[var(--border-color)] bg-(--background) hover:bg-[var(--sidebar-hover)] shadow-[0_0_15px_rgba(0,0,0,0.15)] active:bg-[var(--sidebar-active)]">
                                 {mealPopupStates.fullscreen ? <MinimizeIcon width={20} height={20} /> : <EnlargeIcon width={20} height={20}/>}
                             </button>
                         </div>
