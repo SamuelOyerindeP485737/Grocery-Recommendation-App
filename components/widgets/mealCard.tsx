@@ -1,6 +1,7 @@
 import {table} from "@/components/widgets/table";
 import {GanttChart} from "@/components/widgets/ganttChart";
 import {ChangeMealPopup, ChangeMealPopupPage} from "@/components/widgets/Community/mealPopup";
+import {BookmarkIcon, CarrotIcon, StorefrontIcon} from "@/components/Icons";
 
 
 export type MealType = {
@@ -20,7 +21,7 @@ type MealCardProps = {
     ID: number
 } & ChangeMealPopup & ChangeMealPopupPage
 
-export default function MyMealCard({MealCardData, ID, ChangeMealState, ChangePageNumber} : MealCardProps) {
+export default function MyMealCard({MealCardData, ID, ChangeMealState, ChangeMealPageNumber} : MealCardProps) {
     
     function DisplayIngredients() {
         let IngredientList = ""
@@ -64,7 +65,7 @@ export default function MyMealCard({MealCardData, ID, ChangeMealState, ChangePag
     }
     
     function openCard(id: number) {
-        ChangePageNumber(id);
+        ChangeMealPageNumber(id);
         ChangeMealState.ChangeOpenState();
     }
     
@@ -77,16 +78,16 @@ export default function MyMealCard({MealCardData, ID, ChangeMealState, ChangePag
                 <div className="flex flex-row justify-between">
                     <p className="font-semibold">{MealCardData.title}</p>
                     <div className="flex flex-row items-center">
-                        <img src="/Bookmark%20SVG%20Icon.svg" alt="saveIcon" width="20" height="20"></img>
+                        <BookmarkIcon width={20} height={20} />
                         <p className="text-sm">{DisplaySaves()}</p>
                     </div>
                 </div>
-                <div className="flex flex-row gap-2 opacity-80">
-                    <img src="/carrot.fill.svg" alt="ingredientsIcon" width="18" height="18"></img>
+                <div className="flex flex-row gap-2 opacity-80 items-center">
+                    <CarrotIcon width={23} height={23} />
                     <p className="truncate pr-6">Ingredients: {DisplayIngredients()}</p>
                 </div>
-                <div className="flex flex-row gap-2 opacity-80">
-                    <img src="/storefront.fill.svg" alt="ingredientsIcon" width="18" height="18"></img>
+                <div className="flex flex-row gap-2 opacity-80 items-center">
+                    <StorefrontIcon width={18} height={18} />
                     <p className="truncate pr-6">Stores: {DisplayStores()}</p>
                 </div>
             </div>

@@ -6,11 +6,12 @@ import {useState} from "react";
 import DragSizing from 'react-drag-sizing'
 import {barChart} from "@/components/widgets/barChart";
 import {table} from "@/components/widgets/table";
-import CommunityPage from "@/components/containers/Community/community";
+import CommunityPage, {PopupPageNumbers} from "@/components/containers/Community/community";
 import ChangelogPage from "@/components/containers/Changelog/changelog";
 import DashboardPlaceholder from "@/components/containers/Dashboard/placeholder";
 import {mealPopupStateType} from "@/components/widgets/Community/mealPopup";
 import {challengePopupStateType} from "@/components/widgets/Community/challengePopup";
+import {number} from "prop-types";
 
 
 
@@ -146,13 +147,18 @@ const containerTogglesData = {
 
 const popupToggleData = {
     challengePopup: {
-        openState: true,
+        openState: false,
         fullscreen: false,
     },
     mealPopup: {
         openState: false,
         fullscreen: false
     }
+}
+
+const popupPageData = {
+    MealPopupPageNumber: 0,
+    ChallengePopupPageNumber: 0
 }
 
 type containerToggles = {
@@ -165,6 +171,8 @@ type popupToggles = {
     mealPopup: mealPopupStateType
 }
 
+
+
 export type ValidCategory = "Dashboard" | "Community" | "Changelog";
 
 export type validContainer = keyof containerToggles;
@@ -174,9 +182,10 @@ export type validPopup = keyof popupToggles[keyof popupToggles];
 export default function Home() {
     let [PagesData, setPagesData] = useState<typeof pagesData>(pagesData);
     let [containerToggles, setContainerToggle] = useState<containerToggles>(containerTogglesData);
-    let [popupToggles, setPopupToggle] = useState<popupToggles>(popupToggleData)
+    let [popupToggles, setPopupToggle] = useState<popupToggles>(popupToggleData);
     const [pageNumber, setPageNumber] = useState<number>(pagesData.length-1);
     const [popupPageNumber, setPopupPageNumber] = useState<number>(1);
+    const [popupPageNumbers, setPopupPageNumbers] = useState<PopupPageNumbers>(popupPageData);
     
     function ToggleContainer(key: validContainer) {
         setContainerToggle((prev) => ({
@@ -194,6 +203,10 @@ export default function Home() {
         }))
     }
     
+    function changePopupPage(key: keyof PopupPageNumbers, pageNumber: number) {
+        setPopupPageNumbers((prev) => ({...prev,[key]: pageNumber}))
+    }
+    
     const MealTogglePopupFunctions = {
         ChangeMealState: {
             ChangeOpenState: () => {togglePopup("mealPopup","openState")},
@@ -204,6 +217,11 @@ export default function Home() {
             ChangeFullScreen: () => {togglePopup("challengePopup","fullscreen")}
         }
         
+    }
+    
+    const MealPopupPageFunctions = {
+        ChangeMealPageNumber: (value: number) => {changePopupPage("MealPopupPageNumber",value)},
+        ChangeChallengePageNumber: (value: number) => {changePopupPage("ChallengePopupPageNumber",value)}
     }
     
     const categoryData = {
@@ -238,7 +256,7 @@ export default function Home() {
                            setChatbarPrompt={(prompt) => setPagesData((prev) => prev.map((page,index) => index === pageNumber ? {...page, prompt: prompt} : page))} SendPrompt={() => sendPromptJson()}/>
             </>
         ),
-        Community: (<CommunityPage sidebarState={containerToggles.sidebarState} changeSidebarState={() => ToggleContainer("sidebarState")} mealPopupStates={popupToggles.mealPopup} challengePopupStates={popupToggles.challengePopup} ChangeState={MealTogglePopupFunctions} MealPopupPageNumber={popupPageNumber} ChangePageNumber={(value) => {setPopupPageNumber(value)}}/>),
+        Community: (<CommunityPage sidebarState={containerToggles.sidebarState} changeSidebarState={() => ToggleContainer("sidebarState")} mealPopupStates={popupToggles.mealPopup} challengePopupStates={popupToggles.challengePopup} ChangeState={MealTogglePopupFunctions} PageNumber={popupPageNumbers} ChangePage={MealPopupPageFunctions}/>),
         Changelog: (<ChangelogPage sidebarState={containerToggles.sidebarState} changeSidebarState={() => ToggleContainer("sidebarState")}/>)
 
     }

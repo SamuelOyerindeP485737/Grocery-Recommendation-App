@@ -1,6 +1,7 @@
 import {page} from "@/app/page";
 import classNames from "classnames";
 import {ValidCategory} from "@/app/page";
+import {DocumentclockIcon, Person2Icon, PlusIcon, SidebarleftIcon} from "@/components/Icons";
 
 type MySidebarProps = {
   pageData: page[];
@@ -58,16 +59,16 @@ export function MySidebar({pageData, sidebarState, changeCategory, changeSidebar
                </div>
                 
                 <button onClick={changeSidebarState} className=" border-1 border-(--border-color) bg-white p-2.5 rounded-full justify-center align-center aspect-square flex hover:bg-gray-100 active:bg-[var(--sidebar-active)]">
-                    <img alt="sidebarToggle" src="/sidebar.left.svg" width="18" height="18"></img>
+                    <SidebarleftIcon width={18} height={18} />
                 </button>
             </div>
             <div className="flex flex-col py-4 px-3">
                 
                     <button onClick={() => changeCategory("Community")} className={classNames({"border-1 border-(--sidebar-border-items) bg-(--sidebar-active)":currentCategory==="Community"},{"hover:bg-(--sidebar-hover)":currentCategory!=="Community"},"text-sm font-semibold opacity-70 truncate flex gap-2 align-left items-center rounded-[1.125rem] pl-3 py-2.5 mb-1")}>
-                        <img alt="CommunityIcon" src="/person.2.fill.svg" width="22" height="22"></img><p>Community</p>
+                        <Person2Icon width={21} height={21} /><p>Community</p>
                     </button>
                     <button onClick={() => changeCategory("Changelog")} className={classNames({"border-1 border-(--sidebar-border-items) bg-(--sidebar-active)":currentCategory==="Changelog"},{"hover:bg-(--sidebar-hover)":currentCategory!=="Changelog"},"text-sm font-semibold opacity-70 truncate flex gap-2 align-left items-center rounded-[1.125rem] pl-3 py-2.5 mb-1")}>
-                        <img alt="changelogIcon" src="/document.badge.clock.svg" width="22" height="22"></img><p>Changelog</p>
+                        <DocumentclockIcon width={22} height={22} /><p>Changelog</p>
                     </button>
                 
             </div>
@@ -75,7 +76,7 @@ export function MySidebar({pageData, sidebarState, changeCategory, changeSidebar
                 <div className="flex justify-between">
                     <h3 className="text-sm font-semibold">Pages</h3>
                     <button onClick={createNewPage}>
-                        <img alt="newPage" src="/plus.svg" width="18" height="18"></img>
+                        <PlusIcon width={18} height={18} />
                     </button>
                 </div>
             </div>

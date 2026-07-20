@@ -2,6 +2,7 @@ import {sidebarStateType} from "@/components/containers/sidebar";
 import {changeSidebarStateType} from "@/components/containers/sidebar";
 import {chatbarStateType} from "@/components/containers/Dashboard/chatbar";
 import {changeChatbarStateType} from "@/components/containers/Dashboard/chatbar";
+import {FruitpairIcon, MessageIcon} from "@/components/Icons";
 
 type MyDbPlaceholderProps = sidebarStateType & chatbarStateType & changeSidebarStateType & changeChatbarStateType;
 
@@ -21,13 +22,13 @@ export default function DashboardPlaceholder({sidebarState, chatbarState, change
                 </div>
                 <div className="flex gap-3">
                     <button onClick={changeChatbarState} className={chatbarState ? "hidden" : "bg-[var(--button-inactive-bg)] flex justify-center align-left border-1 border-[var(--border-color)] rounded-full p-2 aspect-square hover:bg-[var(--sidebar-hover)]"}>
-                        <img alt="chatToggle" src="/message.svg" width="22" height="18"></img>
+                        <MessageIcon width={22} height={22} />
                     </button>
                 </div>
 
             </div>
-            <div className="absolute h-full w-full flex justify-center">
-                <img alt="dashboardPlaceholder" src="/Fruits%20Pear%20Icon%20(1).svg" width="50" height="50" className=""></img>
+            <div className="absolute h-full w-full flex items-center justify-center">
+                <FruitpairIcon width={50} height={50} />
             </div>
         </div>
     )

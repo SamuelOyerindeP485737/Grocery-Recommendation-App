@@ -18,7 +18,7 @@ type ChangeMealPopupState = {
 }
 
 export type ChangeMealPopupPage = {
-    ChangePageNumber: (PageNumber: number) => void;
+    ChangeMealPageNumber: (PageNumber: number) => void;
 }
 
 export type MealPopupPageType = {
@@ -33,11 +33,11 @@ export type mealPopupStateData = {
     mealPopupStates: mealPopupStateType
 }
 
-type MealTypeData = {
+type MealDataType = {
     MealData: MealType
 }
 
-type mealPopupProps = mealPopupStateData & MealTypeData & ChangeMealPopup
+type mealPopupProps = mealPopupStateData & MealDataType & ChangeMealPopup
 export default function MyMealPopup({mealPopupStates, MealData, ChangeMealState} : mealPopupProps) {
     const [scrollY,setScrollY] = useState<number>(0);
     const popupRef = useRef<HTMLDivElement>(null);

@@ -8,7 +8,7 @@ export default function VerticalDividerIcon({width, height} : svgCustomizeProps)
                 fillRule="evenodd"
                 clipRule="evenodd"
                 d="M0.5 2V13"
-                stroke="#000000"
+                stroke="currentColor"
                 strokeWidth="1"
                 strokeLinecap="round"
             />

@@ -9,6 +9,7 @@ import {chatbarStateType} from "@/components/containers/Dashboard/chatbar";
 import {changeChatbarStateType} from "@/components/containers/Dashboard/chatbar";
 import {DragSizing} from 'react-drag-sizing'
 import {page} from "@/app/page";
+import {MessageIcon, SidebarleftIcon} from "@/components/Icons";
 
 
 export type Content = {
@@ -46,7 +47,7 @@ export function MyContent({chatbarState, sidebarState, changeSidebarState, chang
                 <div className="p-3 h-16 flex gap-auto justify-between">
                     <div className="flex gap-3 items-center">
                         <button onClick={changeSidebarState} className={sidebarState ? "hidden" : " border-1 border-[var(--border-color)] bg-[var(--button-inactive-bg)] rounded-full p-2.5 aspect-square hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]"}>
-                            <img alt="sidebarToggle" src="/sidebar.left.svg" width="18" height="18"></img>
+                            <SidebarleftIcon width={18} height={18} />
                         </button>
                         <h2 className="text-[18px] font-semibold truncate">
                             {currentPage == "Expiry dates" && "Grocery items by expiry date"}
@@ -62,8 +63,8 @@ export function MyContent({chatbarState, sidebarState, changeSidebarState, chang
                             <p className="text-sm truncate">Expiry dates</p>
                         </button>
                         
-                        <button onClick={changeChatbarState} className={chatbarState ? "hidden" : "bg-[var(--button-inactive-bg)] flex justify-center align-left border-1 border-[var(--border-color)] rounded-full p-1.5 aspect-square hover:bg-[var(--sidebar-hover)]"}>
-                            <img alt="chatToggle" src="/message.svg" width="22" height="18"></img>
+                        <button onClick={changeChatbarState} className={chatbarState ? "hidden" : "bg-[var(--button-inactive-bg)] flex border-1 border-[var(--border-color)] rounded-full p-2 aspect-square hover:bg-[var(--sidebar-hover)]"}>
+                            <MessageIcon width={22} height={22} />
                         </button>
                     </div>
                     

@@ -5,25 +5,35 @@ import MyChallengeCard from "@/components/widgets/challengeCard";
 import BasicTable from "@/components/widgets/table";
 import MyGanttChart, {GanttChart} from "@/components/widgets/ganttChart";
 import MyChallengePopup, {
+    challengePopupPageType,
     challengePopupStateData,
     challengePopupStateType,
-    ChangeChallengePopup
+    ChangeChallengePopup, ChangeChallengePopupPage
 } from "@/components/widgets/Community/challengePopup";
 import MyMealPopup, {
     ChangeMealPopup,
     ChangeMealPopupPage, MealPopupPageType,
     mealPopupStateData
 } from "@/components/widgets/Community/mealPopup";
+import {BarchartIcon, FigurerunIcon, SidebarleftIcon} from "@/components/Icons";
 
 type ChangePopupStates = ChangeMealPopup & ChangeChallengePopup
 
+type ChangePopupPages = ChangeMealPopupPage & ChangeChallengePopupPage
 
 type PopupStateProps = {
     ChangeState: ChangePopupStates
+    ChangePage: ChangePopupPages
 }
 
-type CommunityProps = sidebarStateType & changeSidebarStateType & mealPopupStateData & challengePopupStateData & PopupStateProps & ChangeMealPopupPage & MealPopupPageType;
-export default function CommunityPage({sidebarState,changeSidebarState,mealPopupStates,challengePopupStates, ChangeState, ChangePageNumber, MealPopupPageNumber} : CommunityProps) {
+export type PopupPageNumbers = MealPopupPageType & challengePopupPageType
+
+type PopupPageProps = {
+    PageNumber: PopupPageNumbers
+}
+
+type CommunityProps = sidebarStateType & changeSidebarStateType & mealPopupStateData & challengePopupStateData & PopupStateProps & PopupPageProps;
+export default function CommunityPage({sidebarState,changeSidebarState,mealPopupStates,challengePopupStates, ChangeState, ChangePage, PageNumber} : CommunityProps) {
     
     
     const testMealCardData = [{ //Placeholders for future backend
@@ -243,11 +253,11 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
     
     return(
         <div className="relative h-screen flex-1 bg-(--background) min-w-0">
-            <MyMealPopup mealPopupStates={mealPopupStates} MealData={testMealCardData[MealPopupPageNumber]} ChangeMealState={ChangeState.ChangeMealState}/>
-            <MyChallengePopup challengePopupStates={challengePopupStates} ChangeChallengeState={ChangeState.ChangeChallengeState} />
+            <MyMealPopup mealPopupStates={mealPopupStates} MealData={testMealCardData[PageNumber.MealPopupPageNumber]} ChangeMealState={ChangeState.ChangeMealState}/>
+            <MyChallengePopup challengePopupStates={challengePopupStates} challengeData={testChallengeCardData[PageNumber.ChallengePopupPageNumber]} ChangeChallengeState={ChangeState.ChangeChallengeState} />
             <div className="flex p-3 h-16 gap-3 w-full items-center">
                 <button onClick={changeSidebarState} className={sidebarState ? "hidden" : " border-1 border-[var(--border-color)] bg-[var(--button-inactive-bg)] rounded-full p-2.5 aspect-square hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]"}>
-                    <img alt="sidebarToggle" src="/sidebar.left.svg" width="18" height="18"></img>
+                    <SidebarleftIcon width={18} height={18} />
                 </button>
                 <h2 className="text-[18px] font-semibold truncate">
                     Community page
@@ -257,7 +267,7 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
                 <div>
                     <div className="px-3 flex w-full justify-between">
                         <div className="flex flex-row gap-2 opacity-80 items-center">
-                            <img src="/chart.bar.xaxis.ascending.svg" alt="popularIcon" width="16" height="16"></img>
+                            <BarchartIcon width={18} height={18} />
                             <p className="font-semibold">Popular</p>
                         </div>
                         <div>
@@ -267,7 +277,7 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
                     <div className="px-4 py-3 gap-4 h-fit flex w-full flex-row overflow-y-auto">
 
                         {testMealCardData.map((value, index) => {
-                            return <MyMealCard ChangeMealState={ChangeState.ChangeMealState} key={index} ID={index} MealCardData={value} ChangePageNumber={ChangePageNumber}/>
+                            return <MyMealCard ChangeMealState={ChangeState.ChangeMealState} key={index} ID={index} MealCardData={value} ChangeMealPageNumber={ChangePage.ChangeMealPageNumber}/>
                         })}
 
                     </div>
@@ -275,7 +285,7 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
                 <div>
                     <div className="px-3 flex w-full justify-between">
                         <div className="flex flex-row gap-2 opacity-80 items-center">
-                            <img src="/figure.run.svg" alt="popularIcon" width="16" height="16"></img>
+                            <FigurerunIcon width={22} height={22} />
                             <p className="font-semibold">Challenges</p>
                         </div>
                         <div>
@@ -284,7 +294,7 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
                     </div>
                     <div className="px-4 py-3 gap-4 h-fit flex w-full flex-row overflow-y-auto">
                         {testChallengeCardData.map((value, index) => {
-                            return <MyChallengeCard key={index} ChallengeCardData={value}/>
+                            return <MyChallengeCard ChangeChallengeState={ChangeState.ChangeChallengeState} key={index} ID={index} ChallengeCardData={value} ChangeChallengePageNumber={ChangePage.ChangeChallengePageNumber}/>
                         })}
                         
 

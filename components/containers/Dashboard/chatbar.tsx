@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import {sidebarStateType} from "@/components/containers/sidebar";
 import {changeSidebarStateType} from "@/components/containers/sidebar";
+import {ArrowupIcon, MessageIcon} from "@/components/Icons";
 
 
 export type chatbarStateType = {
@@ -39,7 +40,7 @@ export function MyChatbar({sidebarState, chatbarState, changeSidebarState, chang
             <div className=" flex">
                 
                 <button onClick={changeChatbarState} className="bg-[var(--button-inactive-bg)] p-2 border-1 border-[var(--border-color)] aspect-square rounded-full hover:bg-[var(--sidebar-hover)] active:bg-[var(--sidebar-active)]">
-                    <img alt="chatToggle" src="/message.svg" width="22" height="18"/>
+                    <MessageIcon width={22} height={22} />
                 </button>
                 
             </div>
@@ -49,8 +50,8 @@ export function MyChatbar({sidebarState, chatbarState, changeSidebarState, chang
             <div className="border-1 border-[var(--border-color)] rounded-2xl shadow-xl shadow-[#faf0f0] ">
                 <textarea minLength={4} onChange={(e) => setChatbarPrompt(e.target.value)} name="gptChatBox" id="gptChatBox" className="resize-none w-full outline-0 max-h-23 p-2.5 placeholder:whitespace-nowrap" placeholder="At the grocery store i usually buy.."/>
                 <div className="px-2 w-full flex justify-end pb-2">
-                    <button onClick={sendPrompt} className="border-1 border-[var(--chatbox-button)] bg-[var(--chatbox-button)] px-2.5 rounded-full aspect-square">
-                        <img alt="send button" src="/arrow.up.svg" width="15" height="15"/>
+                    <button onClick={sendPrompt} className="border-1 border-[var(--chatbox-button)] bg-[var(--chatbox-button)] px-2 rounded-full aspect-square text-white">
+                        <ArrowupIcon width={20} height={20} />
                     </button>
                 </div>
                 
