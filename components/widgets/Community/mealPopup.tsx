@@ -2,6 +2,7 @@ import BasicTable from "@/components/widgets/table";
 import MyGanttChart from "@/components/widgets/ganttChart";
 import classNames from "classnames";
 import {MealType} from "@/components/widgets/mealCard";
+import Calendar from "@/components/widgets/Calender";
 
 import {EnlargeIcon, BackIcon, BookmarkIcon, MinimizeIcon, ClockIcon, FlameIcon, VerticalDividerIcon, CarrotIcon, CalenderIcon} from "@/components/Icons";
 import {useEffect, useRef, useState} from "react";
@@ -57,7 +58,7 @@ export default function MyMealPopup({mealPopupStates, MealData, ChangeMealState}
         }
     }, [popupRef.current]);
     
-
+        //<MyGanttChart ganttData={MealData.meal_schedule}/>
     
     
     return(
@@ -123,7 +124,7 @@ export default function MyMealPopup({mealPopupStates, MealData, ChangeMealState}
                                     <CalenderIcon width={20} height={20} />
                                 </div>
                                 <div className="flex">
-                                    <MyGanttChart ganttData={MealData.meal_schedule}/>
+                                    <Calendar />
                                 </div>
                             </div>
                         </div>
