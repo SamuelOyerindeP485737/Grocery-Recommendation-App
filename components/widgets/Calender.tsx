@@ -65,6 +65,12 @@ function Calender({pageRef} : CalenderProps) {
         return ((pageRefWidth / 2) + pageCalenderOffset)
     }
     
+    function changeDateMonthState(previousDate: Date,amount: number) {
+        const newDate = new Date(previousDate)
+        newDate.setMonth(newDate.getMonth() + amount)
+        return newDate;
+    }
+    
     //console.log("say something")
     const callbackFunc = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
         entries.forEach((entry) => {
@@ -73,7 +79,7 @@ function Calender({pageRef} : CalenderProps) {
 
             let threshold = calculateThreshold();
             
-            /*if (parentRef.current) {
+            /*if (parentRef.current) { For debugging
                 console.log("bounding client size: " + getBoundingClientRect(parentRef.current).width)
                 console.log("root width: " + root?.width)
                 console.log("rect width: " + rect?.width)
@@ -89,24 +95,23 @@ function Calender({pageRef} : CalenderProps) {
                     if (!lastIncreasedRef.current) return;
                             
                     setCurrentMonth((prev) => {
-                        newMonth = new Date(prev)
-                        newMonth.setMonth(newMonth.getMonth() - 1)
-                        return newMonth
+                        return changeDateMonthState(prev, -1)
                     })
+                    
                     lastIncreasedRef.current = false;
-                    console.log("Element has decreased the month");
+                    //console.log("Element has decreased the month");
                         
                 }
                 else if (rect.left < threshold) {
                         
                     if (lastIncreasedRef.current) return;
+                    
                     setCurrentMonth((prev) => {
-                        newMonth = new Date(prev)
-                        newMonth.setMonth(newMonth.getMonth() + 1)
-                        return newMonth
+                        return changeDateMonthState(prev, 1)
                     })
+                    
                     lastIncreasedRef.current = true;
-                    console.log("Element has increased the month");
+                    //console.log("Element has increased the month");
                         
                 }
             
