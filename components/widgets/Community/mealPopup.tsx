@@ -42,6 +42,7 @@ type mealPopupProps = mealPopupStateData & MealDataType & ChangeMealPopup
 export default function MyMealPopup({mealPopupStates, MealData, ChangeMealState} : mealPopupProps) {
     const [scrollY,setScrollY] = useState<number>(0);
     const popupRef = useRef<HTMLDivElement>(null);
+    const pageRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const popup = popupRef.current
@@ -62,7 +63,7 @@ export default function MyMealPopup({mealPopupStates, MealData, ChangeMealState}
     
     
     return(
-        <div onClick={ChangeMealState.ChangeOpenState} className={classNames({"opacity-0 pointer-events-none":!mealPopupStates.openState},"pointer-events-auto transition-all duration-150 absolute z-3 min-h-60 inset-0 bg-black/30")}>
+        <div ref={pageRef} onClick={ChangeMealState.ChangeOpenState} className={classNames({"opacity-0 pointer-events-none":!mealPopupStates.openState},"pointer-events-auto transition-all duration-150 absolute z-3 min-h-60 inset-0 bg-black/30")}>
             <div onClick={(e) => e.stopPropagation()} className={classNames({"rounded-0 inset-0 shadow-none":mealPopupStates.fullscreen,"rounded-[1.375rem] inset-x-[10%] inset-y-15 shadow-[0_0_15px_rgba(0,0,0,0.15)]":!mealPopupStates.fullscreen},{"scale-100":mealPopupStates.openState,"scale-80":!mealPopupStates.openState},"absolute min-w-100 min-h-40 z-4 overflow-clip bg-(--background) transition-all ease-out duration-150")}>
                 <div className="h-full relative">
                     <div ref={popupRef} className=" h-full overflow-y-auto flex flex-col">
@@ -124,7 +125,7 @@ export default function MyMealPopup({mealPopupStates, MealData, ChangeMealState}
                                     <CalenderIcon width={20} height={20} />
                                 </div>
                                 <div className="flex">
-                                    <Calendar />
+                                    <Calendar pageRef={pageRef} />
                                 </div>
                             </div>
                         </div>

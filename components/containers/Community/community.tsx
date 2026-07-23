@@ -41,7 +41,7 @@ export default function CommunityPage({sidebarState,changeSidebarState,mealPopup
         image: "https://www.eatingwell.com/thmb/GRsO0F0K1NLgON-cyvBFNW0EA9Y=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simple-1200-Calorie-Meal-Plan-30-Day-Week-3-horizontal-low-9f926c1f40104c459f04f3dae720236a.jpg",
         save_amount: 2631240,
         duration: "30 days",
-        calorie_amount: 2200,
+        calorie_amount: 1200,
         description: "A curated set of high calorie meals to get you going",
         stores: ["Aldi","Tesco","Sainsbury"],
         ingredient_table:[{

@@ -6,12 +6,12 @@ export default function DocumentclockIcon({width, height} : svgCustomizeProps) {
         <svg width={`${width}`} height={`${height}`} version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35.3613 34.8535">
             <defs>
                 <linearGradient id="gradient1" x1="5" y1="3.97461" x2="5" y2="34.8535" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stop-color="#323232" stop-opacity="1"/>
-                    <stop offset="1" stop-color="black" stop-opacity="1"/>
+                    <stop offset="0" stopColor="#323232" stopOpacity="1"/>
+                    <stop offset="1" stopColor="black" stopOpacity="1"/>
                 </linearGradient>
                 <linearGradient id="gradient2" x1="5" y1="3.97461" x2="5" y2="34.8535" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stop-color="#323232" stop-opacity="1"/>
-                    <stop offset="1" stop-color="black" stop-opacity="1"/>
+                    <stop offset="0" stopColor="#323232" stopOpacity="1"/>
+                    <stop offset="1" stopColor="black" stopOpacity="1"/>
                 </linearGradient>
             </defs>
             <g>

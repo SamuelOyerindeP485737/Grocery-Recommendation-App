@@ -6,8 +6,8 @@ export default function StorefrontIcon({width, height} : svgCustomizeProps) {
         <svg width={`${width}`} height={`${height}`} version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.7148 26.9238">
             <defs>
                 <linearGradient id="gradient1" x1="5" x2="5" y2="26.8945" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stop-color="#323232" stop-opacity="1"/>
-                    <stop offset="1" stop-color="black" stop-opacity="1"/>
+                    <stop offset="0" stopColor="#323232" stopOpacity="1"/>
+                    <stop offset="1" stopColor="black" stopOpacity="1"/>
                 </linearGradient>
             </defs>
             <g>
