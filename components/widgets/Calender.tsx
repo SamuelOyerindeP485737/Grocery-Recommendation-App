@@ -1,6 +1,7 @@
 import {memo, RefObject, useEffect, useRef, useState} from "react";
 import getBoundingClientRect from "@popperjs/core/lib/dom-utils/getBoundingClientRect";
 import {getRootParams} from "next/dist/server/app-render/create-component-tree";
+import classNames from "classnames";
 
 type Day = {
     Date: string,
@@ -33,8 +34,6 @@ function Calender({pageRef} : CalenderProps) {
     const parentRef = useRef<HTMLDivElement>(null);
     const Refs = useRef(new Map<string, ObservedDay>());
     const lastIncreasedRef = useRef<boolean>(false);
-    
-    
     
     function createThresholds()  { //Mad scientist era
         let thresholdList = []
@@ -89,7 +88,7 @@ function Calender({pageRef} : CalenderProps) {
             if (!entry.isIntersecting) return;
             
             if (!root) return;
-                let newMonth : Date
+            
                 if (rect.left > threshold) {
                         
                     if (!lastIncreasedRef.current) return;
@@ -141,16 +140,28 @@ function Calender({pageRef} : CalenderProps) {
     }, [currentMonth]);
     
     //console.log(mealDays)
-    
+    //Colors for horizontal borders and saturday and sunday 
+    //remember to render meal slots based on data structure
     return(
-        <div>
+        <div className="w-full">
             <div className="flex flex-row gap-1 items-center">
                 <p className="font-semibold text-xl">{currentMonth?.toLocaleString("en-GB",{month: "long"})}</p>
                 <p className="text-xl">{currentMonth?.getFullYear()}</p>
             </div>
-            <div ref={parentRef} className="flex flex-row w-full snap-mandatory snap-x overflow-x-auto scrollbar-hide">
-                <div className="flex flex-row w-full">
-
+            <div className="flex gap-2 flex-row w-full">
+                <div className="flex flex-col ">
+                    <div className="h-[1.5rem]">
+                    </div>
+                    <div className="gap-12 h-full items-end flex flex-col">
+                        <p>Morning</p>
+                        <p>Breakfast</p>
+                        <p>Lunch</p>
+                        <p>Dinner</p>
+                        <p>Desert</p>
+                    </div>
+                </div>
+                
+                <div ref={parentRef} className="flex flex-row shrink-0 w-full snap-mandatory snap-x overflow-x-auto scrollbar-hide">
                     {mealDays.map((day, index) => (
                         <div ref={(element) => {
                             if (element) {
@@ -164,8 +175,11 @@ function Calender({pageRef} : CalenderProps) {
                                     weekday: "short",
                                     day: "numeric"
                                 })}</p>
-                                <div className="border-l border-(--border-color) border-r w-full h-30">
-
+                                <div className={classNames({"bg-(--secondary-background)":day.getDay() === 6 || day.getDay() === 0},"border-(--border-color) border-r border-b w-full h-full")}>
+                                    <div className="h-18 border-t border-(--border-color)"></div>
+                                    <div className="h-18 border-t border-(--border-color)"></div>
+                                    <div className="h-18 border-t border-(--border-color)"></div>
+                                    <div className="h-18 border-t border-(--border-color)"></div>
                                 </div>
                             </div>
 

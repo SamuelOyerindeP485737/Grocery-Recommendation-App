@@ -122,13 +122,13 @@
 :root {
     
     --background: #faf7f7;
-    --secondary-background: #faf0f0;
+    --secondary-background: #f8eaea;
     --sidebar-background: #f8e6e6;
     --sidebar-active: #deb9b9;
     --sidebar-hover: #f3d9d9;
     --sidebar-category-border: #d7acac;
     --sidebar-border-items: #b48f8f;
-    --border-color: #e1dada;
+    --border-color: #e0d5d5;
     --chatbox-button: #361a1a;
     --inverted-active-bg: #562c2c;
     --button-inactive-bg: #f6e4e4;
